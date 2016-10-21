@@ -12,7 +12,7 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 library(dplyr)
 library(stringdist)
-library(reshape2)
+library(reshape2)   
 library(ggplot2)
 ```
 
