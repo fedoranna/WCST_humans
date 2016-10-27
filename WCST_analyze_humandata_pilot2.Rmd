@@ -1,0 +1,333 @@
+---
+title: "WCST analysis"
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+
+# PACKAGES
+knitr::opts_chunk$set(echo = FALSE)
+library(dplyr)
+library(stringdist)
+library(reshape2)   
+library(ggplot2)
+```
+
+```{r inititalize, message=FALSE, warning=FALSE}
+
+# INITIALIZE
+rm(list = ls()) # clear workspace
+setwd("C:/Users/Anna/OneDrive/Documents/R/")
+datafile = "C:/Users/Anna/OneDrive/Documents/DOKUMENTUMOK/INSIGHT/WCST/Results/pilot1/pilot1.csv"
+datadir = "C:/Users/Anna/OneDrive/Documents/DOKUMENTUMOK/INSIGHT/WCST/Results/pilot2/"
+
+# Read data from one file
+alldata1 <- read.table(datafile, header = FALSE, sep = ";")
+
+# Read data from files in a directory
+allfiles <- list.files(datadir, pattern = "*Results.txt" )
+alldata2 = c()
+for (i in 1:length(allfiles))
+{
+  d <- read.table(paste(datadir, allfiles[i], sep=""), header = FALSE, sep = ",") 
+  alldata2 <- rbind(alldata2, d)
+}
+
+alldata <- alldata2
+
+# Change column names
+colnames(alldata) <- c("condition", "part", "total_nb", "trial", "class", "category", "tar_card", "src_card", "match", "mv_time", "total_time")
+
+```
+
+# Check data
+
+The size of the raw data table is (number of moves x number of variables):
+```{r check data 1} 
+# CHECK DATA
+dim(alldata)
+```
+
+There should be 4 types of rules: c, n, s and spxxxx (x stands for A, B, C or D). If there is more than 4, calculations based on the rules will be wrong! 
+```{r check data 2}
+summary(alldata$category)
+rules <- levels(alldata$category)
+spatial_sequence <- rules[4]
+```
+
+There should be 24+1=25 types of source cards if we use unambiguous cards or 64-4+1=61 types if we use ambiguous cards. The number of source card types:
+
+```{r}
+length(summary(alldata$src_card))
+```
+
+All source cards should have a 4-digit code. The source card codes and frequencies were:
+```{r check data 3}
+summary(alldata$src_card) 
+```
+
+There should be 4 types of target cards, with the codes:  tr1A, sg2B, qy3C, cb4D. Target card codes and frequencies were:
+```{r check data 4}
+summary(alldata$tar_card)
+```
+
+# Variables
+## Additional variables per move
+
+From the raw data, I calculated some additional variables, such as:
+
+* Think time: total time between two drop action minus the time spent with drag-and-drop
+* Current rule: this is the same as "category", but recoded with numbers, where s, c, n and sp have the codes: 1, 2, 3 and 4, respectively.
+* Applied rule: the rule that the move conforms to. THIS WON'T BE CORRECT UNTIL THE SOURCE CARD CODE DOES NOT INCLUDE THE INDEX FOR THE SPATIAL RULE
+* Number of applied rules: integer from 0 to 4 (actually 3, because we excluded the key cards from the deck)
+* Random search: this is TRUE if none of the rules applies to the current rule (if the number of applied rules = 1)
+* Perseveration error: after a "success", we check if the participant keeps using the same rule (if the applied rule - or one of the applied rules - is the same as the current rule in the successful step) for any number of moves
+
+```{r variables per move, warning = FALSE}
+# Create think_time variable
+alldata <- mutate(alldata, think_time = total_time - mv_time)
+
+# Create current_rule variable
+cr <- vector("list", nrow(alldata))
+for (i in 1:nrow(alldata))
+{
+  if (alldata$category[i] == "s"){cr[[i]] <- 1}
+  if (alldata$category[i] == "c"){cr[[i]] <- 2}
+  if (alldata$category[i] == "n"){cr[[i]] <- 3}
+  if (alldata$category[i] == spatial_sequence){cr[[i]] <- 4}
+}
+alldata <- mutate(alldata, current_rule = cr)
+
+# Create applied_rule variable
+sc<-as.matrix(alldata$src_card)
+tc<-as.matrix(alldata$tar_card)
+rl<-vector("list", nrow(alldata))
+for (i in 1:nrow(alldata))
+{
+  A <- strsplit(sc[i],"")
+  A <- A[[1]][1:3]
+  B <- strsplit(tc[i],"")
+  B <- B[[1]][1:3]
+  if (sum(A==B)==1) { # if the move is according to one rule
+    rl[[i]] <- which(A==B) 
+  }
+  if (sum(A==B)>1) { # if the move is according to more rules (ambiguous card)
+    rl[[i]] <- which(A==B)
+  }
+  if (sum(A==B)==0) { # if the move is according to none of the rules
+    rl[[i]] <- 0
+  }
+}
+alldata <- mutate(alldata, applied_rule = rl)
+
+# Create number of applied rules variable
+sc<-as.matrix(alldata$src_card)
+tc<-as.matrix(alldata$tar_card)
+nbrl<-vector("list", nrow(alldata))
+for (i in 1:nrow(alldata))
+{
+  A <- strsplit(sc[i],"")
+  A <- A[[1]][1:3]                      
+  B <- strsplit(tc[i],"")
+  B <- B[[1]][1:3]
+  nbrl[[i]] <- sum(which(A==B))
+}
+alldata <- mutate(alldata, nbof_appliedrules = nbrl)
+
+# Create random search variable = no current rule?
+alldata <- mutate(alldata, randsearch = nbof_appliedrules==0)
+
+# Perseveration error variable
+pers <- rep(FALSE,nrow(alldata))
+for (i in 2:nrow(alldata)-1){
+  if (  alldata$category[[i]]!=alldata$category[[i+1]] &&
+        alldata$part[[i]]==alldata$part[[i+1]]  &&
+        alldata$match[[i]]== "true" ) {
+    n <- 1
+    while (sum(alldata$current_rule[[i]]==alldata$applied_rule[[i+n]]) > 0) {
+      pers[[i+n]] <- TRUE
+      n <- n+1
+    }
+  }
+}
+alldata <- mutate(alldata, persev = pers)
+```
+
+### An example: Data for participant 242040
+
+```{r}
+subset <- select(alldata, -(c(condition, part, mv_time, total_time, think_time, nbof_appliedrules, total_nb, category, class, trial)))
+subset <- filter(subset, alldata$part==242040)
+subset
+```
+
+## Variables per participant
+
+From the per-move variables, I calculated averaged and summed values for each participant, separately for each rule:
+
+* success
+* failure
+* number of moves
+* number of correct moves
+* number of incorrect moves
+* average time between two drop actions
+* average move time
+* average think time 
+* time spent with the task (sec)
+
+```{r part_data}
+cond_part_rule <- group_by(alldata, condition, part, category)
+part_data <- summarize(cond_part_rule, 
+          success_bin = sum(class=="success"), 
+          failure_bin = sum(class=="failed"),
+          moves_nb = sum(class=="explore")+1,
+          correctmoves_nb = sum(match=="true"),
+          incorrectmoves_nb = sum(match=="false"),
+          totaltime_avg = mean(total_time),
+          movetime_avg = mean(mv_time),
+          thinktime_avg = mean(think_time),
+          time_spent = sum(total_time)/1000)
+part_data[,1:6]
+part_data[,7:12]
+```
+
+* *Would perseveration be interesting? Do we need it?*
+* *Distribution of rules used?*
+
+## Variables per condition
+
+I coded the following variables, separately for each rule:
+
+* Number of participants
+* Number of solvers
+* Number of nonsolvers
+* Percentage of solvers
+* Average number of moves
+* Average time spent with the task
+
+*Other ideas?*
+
+```{r cond_data}
+cond_rule <- group_by(part_data, condition, category)
+cond_data <- summarize(cond_rule,
+                       partic_nb = sum(success_bin)+sum(failure_bin),
+                       solvers_nb = sum(success_bin),
+                       nonsolvers_nb = sum(failure_bin),
+                       solvers_perc = (sum(success_bin)/(sum(success_bin)+sum(failure_bin)))*100,
+                       nbofmoves_avg = mean(moves_nb),
+                       timespsent_avg = mean(time_spent)
+                       )
+cond_data[,1:6]
+cond_data[,7:ncol(cond_data)]
+```
+
+# Hypotheses
+
+In our plans we had the following testable hypotheses:
+
+1. Going through the standard rules first makes the task of finding the index rule harder
+    a) Condition 1 (WCST) will be more difficult than condition 2 (WCSTF)
+    b) Condition 3 (WCSTC) will be more difficult than condition 4 (WCSTFC)
+    c) Condition 1 (WCST) will be more difficult than condition 4 (WCSTFC)
+2. Using the standard cards for the index rule makes the task of finding the index rule harder
+    a) Condition 1 (WCST) will be more difficult than condition 3 (WCSTC)
+    b) Condition 2 (WCSTF) will be more difficult than condition 4 (WCSTFC)
+    c) Condition 1 (WCST) will be more difficult than condition 4 (WCSTFC)
+3. Some participants will report having an Heureka! moment, so this task can be categorized as an insight task
+4. Is impasse associated with inactivity in this task? Is the average move time longer for the spatial task than for the other tasks?
+
+*Would you like to add something else?*
+*Can we justify Hypothesis 1/c and 2/c?*
+
+# Analyses
+
+##Exclusion of participants
+*What exclusion criteria do we want to use?*
+
+* Exclude participants who did not finish the experiment?
+* Exclude participants who did not find out the standard rules?
+* Exclude participants who stay inactive for more than a certain amount of time?
+* Exclude participants who respond too quickly?
+
+## Statistical tests
+
+For deciding whether solving the task in one condition is more difficult than solving it in another, we can use two variables: solution rates and solution times. As for the solution rates, we can construct a four-by-two contingency table (number of solvers and non-solvers in the four conditions). Analyzing a larger than two-by-two contingency table is possible with a Chi-square test, but it is only useful if the categories defining the rows are arranged in a natural order with equal spacing between rows. This is not true in our case, so we will have to analyze two-by-two contingency tables instead, separately for Hypothesis 1 and Hypothesis 2. We chose Fisher's exact test, which is supposed to be more exact than the Chi-square test, especially if the cells in the contingency table contain small values.
+
+Solution rates in the four conditions:
+```{r soution rates df}
+SR1234 <- filter(cond_data, category==spatial_sequence) %>% select(solvers_nb:nonsolvers_nb)
+SR1234
+```
+
+Solution time is calculated for each participant as the time spent with trying to solve the sequence rule (in minutes). We analyzed the solution time with a two-way ANOVA. Median solution times for the four conditions are shown by the box plots in the following figure:
+
+```{r solution times df}
+ST1234 <- filter(part_data, category==spatial_sequence) %>% select(time_spent)
+ST <- ST1234[,c(1,3)]
+ST <- melt(ST, id.var = "condition")
+ST[,3] <- ST[,3]/60
+ggplot(data = ST, aes(x=variable, y=value)) + geom_boxplot(aes(fill=condition))
+```
+
+### Number of solvers
+#### Does the order of rules influence the difficulty of finding the sequence rule?
+We analyzed the contingency table containing the number of solvers and non-solvers in condition WCST and WCSTF and then separately, for condition WCSTC and WCSTFC. A p<0.05 means that the row/column association is statistically significant. 
+```{r Fisher tests}
+fisher.test(SR1234[c(1,3), c(2,3)])
+fisher.test(SR1234[c(2,4), c(2,3)])
+```
+
+#### Does the order of rules influence the difficulty of finding the sequence rule?
+We analyzed the contingency table containing the number of solvers and non-solvers in condition WCST and WCSTC and then separately, for condition WCSTF and WCSTFC. A p<0.05 means that the row/column association is statistically significant. 
+```{r Fisher test}
+fisher.test(SR1234[c(1,2), c(2,3)])
+fisher.test(SR1234[c(3,4), c(2,3)])
+```
+
+### Solution time
+We checked whether the data was normally distributed with Kolmogorov-Smirnoff test:
+```{r ANOVA or Wilcoxon}
+
+# Variables
+ST1 <- filter(ST1234, condition=="wcst") %>% select(time_spent)
+ST2 <- filter(ST1234, condition=="wcstf") %>% select(time_spent)
+ST3 <- filter(ST1234, condition=="wcstc") %>% select(time_spent)
+ST4 <- filter(ST1234, condition=="wcstfc") %>% select(time_spent)
+
+ST1 <- as.matrix(ST1[,2])
+ST2 <- as.matrix(ST2[,2])
+ST3 <- as.matrix(ST3[,2])
+ST4 <- as.matrix(ST4[,2])
+
+# Statistics
+normality1 <- ks.test(ST1, pnorm, alternative="two.sided", exact=NULL)
+normality2 <- ks.test(ST2, pnorm, alternative="two.sided", exact=NULL)
+normality3 <- ks.test(ST3, pnorm, alternative="two.sided", exact=NULL)
+normality4 <- ks.test(ST4, pnorm, alternative="two.sided", exact=NULL)
+
+normality1
+normality2
+normality3
+normality4
+
+```
+
+If the data is normally distributed, we use ANOVA, if it is not, we use Wilcoxon.
+```{r}
+
+if (normality1$p.value > 0.05 && normality2$p.value > 0.05) {
+  stati <- t.test(ST1, ST2, alternative="two.sided", paired=FALSE, var.equal=FALSE,conf.level=0.95)
+} else {
+  stati <- wilcox.test(ST1, ST2, alternative="two.sided", paired=FALSE, exact=NULL, correct=TRUE, conf.int=TRUE, conf.level=0.95) # two sample Wilcoxon test is the same as the Mann-Whitney test
+}
+stati
+```
+
+
+
+
+
+
