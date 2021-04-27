@@ -1,0 +1,62 @@
+wlin,1,Informed consent,Friday 9th 21:39:39
+wlin,2,Informed consent,Friday 9th 21:39:46
+wlin,2,Datasheet,Friday 9th 21:40:06
+wlin,2,Instruction,Friday 9th 21:40:07
+wlin,1,Datasheet,Friday 9th 21:40:12
+wlin,1,Instruction,Friday 9th 21:40:12
+wlin,2,WCST,Friday 9th 21:40:23
+wlin,1,WCST,Friday 9th 21:40:37
+wlin,3,Informed consent,Friday 9th 21:40:48
+wlin,1,WCST,Friday 9th 21:40:56
+wlin,3,Datasheet,Friday 9th 21:41:03
+wlin,3,Instruction,Friday 9th 21:41:03
+wlin,3,WCST,Friday 9th 21:41:25
+wlin,1,WCST,Friday 9th 21:41:26
+wlin,1,WCST,Friday 9th 21:41:28
+wlin,1,WCST,Friday 9th 21:41:29
+wlin,1,WCST,Friday 9th 21:41:31
+wlin,1,WCST,Friday 9th 21:41:32
+wlin,1,Instruction,Friday 9th 21:41:34
+wlin,4,Informed consent,Friday 9th 21:41:40
+wlin,5,Informed consent,Friday 9th 21:43:10
+wlin,6,Informed consent,Friday 9th 21:43:14
+wlin,7,Informed consent,Friday 9th 21:43:29
+wlin,5,Datasheet,Friday 9th 21:43:41
+wlin,5,Instruction,Friday 9th 21:43:42
+wlin,6,Datasheet,Friday 9th 21:43:54
+wlin,6,Instruction,Friday 9th 21:43:55
+wlin,7,Datasheet,Friday 9th 21:43:58
+wlin,7,Instruction,Friday 9th 21:43:58
+wlin,8,Informed consent,Friday 9th 21:44:11
+wlin,2,Survey,21:44:16
+wlin,5,WCST,Friday 9th 21:44:18
+wlin,9,Informed consent,Friday 9th 21:44:26
+wlin,7,WCST,Friday 9th 21:44:29
+wlin,6,WCST,Friday 9th 21:44:32
+wlin,8,Datasheet,Friday 9th 21:44:43
+wlin,8,Instruction,Friday 9th 21:44:43
+wlin,10,Informed consent,Friday 9th 21:44:45
+wlin,8,WCST,Friday 9th 21:45:09
+wlin,10,Datasheet,Friday 9th 21:45:19
+wlin,10,Instruction,Friday 9th 21:45:19
+wlin,3,Survey,21:45:26
+wlin,9,Datasheet,Friday 9th 21:45:43
+wlin,9,Instruction,Friday 9th 21:45:44
+wlin,9,WCST,Friday 9th 21:45:59
+wlin,11,Informed consent,Friday 9th 21:46:09
+wlin,12,Informed consent,Friday 9th 21:46:15
+wlin,11,Datasheet,Friday 9th 21:46:40
+wlin,11,Instruction,Friday 9th 21:46:40
+wlin,12,Datasheet,Friday 9th 21:47:01
+wlin,12,Instruction,Friday 9th 21:47:01
+wlin,11,WCST,Friday 9th 21:47:14
+wlin,12,WCST,Friday 9th 21:47:18
+wlin,6,Survey,21:47:40
+wlin,5,Survey,21:47:47
+wlin,9,Survey,21:48:16
+wlin,12,Survey,21:48:41
+wlin,11,Survey,21:49:15
+wlin,7,Survey,21:49:49
+wlin,8,Survey,21:50:29
+wlin,10,WCST,Friday 9th 21:56:21
+wlin,10,Survey,21:58:22

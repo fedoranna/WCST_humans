@@ -1,0 +1,16 @@
+wlin|1|hello 1|hello 2|yes aha|1|yes
+moonsq|5|find out the pattern of acceptance.|4&gt;1&gt;2&gt;3 seemed to be the sorting pattern.|yes aha|2|interesting experiment!
+wnol|3|To measure how long it would take participants to figure out what made a match 'correct' or 'incorrect'.|The shape of the object, color of the object, and number of object must be different between the two cards matched. In other words they must have no similarity.|yes aha|3|I don't know if this is useful or not but I experienced a false 'aha' moment. I was trying to figure out the system and the first time I got it right I thought I had figured it out, but then I tested what I thought the rule was on another card and I was wrong. So I technically had multiple aha moments, its just the first was false.
+wlout|8|To see how long it would take participants to work out what the rule for sorting was.|There was a letter underneath the card that needed to be sorted which you had to scroll down to see.|yes aha|2|
+wlin|7|Problem solving exercise under timed conditions|Ignore the shape and simply follow the letter|yes aha|2|No
+wlout|14|to see whether colour or shape influenced where you place the cards despite the A-D label given to them|asigning the A-D label from the cards in the decks to the piles|no aha|1|
+moonsq|11|I wasn't sure.|It seemed to be going in order. But I wasn't sure if it was just random.|yes aha|4|
+wlout|2|The goal of the experiment was to check my vision.|I find a rule that was about the choices of the cards according to the letters.|yes aha|4|Thank you for giving me the survey. I am very pleased  to work with you.
+wnola|16|To see how easy it was for people to find out an overall pattern|I did at the end of the experiment, admittedly I didn't pick it enough quick enough. It was each option after each other consecutively.|yes aha|4|
+wlout|20|Sorting, paying attention|It was based on the letter of the card|yes aha|5|N/A
+wnol|21|To try and work out the rule, took me far too long!|for example, 3 red triangles.. the card would then go into the deck with two cards in, if that deck is red then it would go into the deck with 1 card, if that card was triangle shape then it would go into the 4th deck|yes aha|7|
+wnolfs|18|To see if people can find patterns in the correct and incorrect matching|I did not.|no aha|8|
+wlin|25|Fun|The letters|yes aha|3|
+||To see if the color of card, number of shapes on card, type of shape on card affected where you placed the card|Match the letter on the bottom of the card to the cards on the top|yes aha|2|
+wnolfs|24|The goal seems to be to figure out what the rule or pattern of this card sorting experiment is supposed to be,|The rule is that you have to sort each card into the four cards above in order from left to right.|yes aha|7|This study was very fun!
+||To try work out a pattern/rule|No I could not work it out|no aha|8|

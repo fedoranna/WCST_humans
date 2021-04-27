@@ -1,0 +1,10 @@
+wonly|3|To test speed and how fast users would get used to the task.||yes aha|1|At the beginning, I couldn't drag the card at all.
+wonly|5|to see how people sort cards|i put the card into the pile with the matching letter|no aha|1|
+wonly|7|Not a clue|Letter of the alphabet|no aha|1|
+wonly|8|To sort the cards into the piles as quickly as possible.|Keep my eyes tracking the card at the bottom.|yes aha|2|
+wonly|10|See how quick you could sort the cards and figure out the rule|Matching the letters on the cards|no aha|1|No
+wonly|6|To test the vision of individuals|Yes. Dragging the given card to the correct key card|yes aha|1|The study was easy and straight to the point
+wonly|13|I am not sure - matching letters?|Match the letter of the deck of cards to the key card letter|no aha|1|No
+||To see which information concepts you found important on the cards|Yes.  It was matched by letter A,B,C,D|yes aha|3|Yes it was interesting how I didn't notice the letters until I'd made many mistakes.  I focused on symbols, colours, numbers and then only finally letters.  Which was strange when in hindsight it was quite obvious
+wonly|14|not sure|Yes match the letters|no aha|1|none
+wonly|15|To see if participants could work out how to drop and drag the cards|Press for a second then drag|yes aha|2|

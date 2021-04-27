@@ -1,9 +1,9 @@
 ---
 title: "WCST analysis"
 output:
-  pdf_document: default
+  #pdf_document: default
   html_document: default
-  word_document: default
+  #word_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -20,9 +20,9 @@ library(ggplot2)
 
 # INITIALIZE
 rm(list = ls()) # clear workspace
-setwd("C:/Users/Anna/OneDrive/Documents/R/")
-datafile = "C:/Users/Anna/OneDrive/Documents/DOKUMENTUMOK/INSIGHT/WCST/Results/pilot1/pilot1.csv"
-datadir = "C:/Users/Anna/OneDrive/Documents/DOKUMENTUMOK/INSIGHT/WCST/Results/pilot2/"
+setwd("C:/Users/fedor/OneDrive/Documents/R/")
+datafile = "C:/Users/fedor/OneDrive/Documents/DOKUMENTUMOK/INSIGHT/WCST/Results/pilot1/pilot1.csv"
+datadir = "C:/Users/fedor/OneDrive/Documents/DOKUMENTUMOK/INSIGHT/WCST/Results/pilot2/"
 
 # Read data from one file
 alldata1 <- read.table(datafile, header = FALSE, sep = ";")

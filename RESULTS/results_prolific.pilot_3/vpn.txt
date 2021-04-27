@@ -1,0 +1,11 @@
+2,5dc9a90edbe8c86c44981f07,18,male,corrected,not color blind
+1,5f46bca0979ac307d9b278f8,28,female,normal,colorblind
+3,5eea9502fd8990160be45c52,24,female,normal,not color blind
+5,5e5109bfd6057413330c4f7b,35,female,normal,not color blind
+6,5eac25f0cced6122f7522ac1,25,female,corrected,not color blind
+7,5f1d630b8358ad00080a5206,31,male,normal,not color blind
+8,5acbd67df69e940001d9cdda,38,female,corrected,not color blind
+10,5ee348695e8d840009e3aac4,18,male,normal,not color blind
+9,5ebafd90702ef30af2829980,35,male,normal,not color blind
+11,5e374efcde60e36df4efe6b9,33,female,normal,not color blind
+12,5d5ef0f7befec1001944e1f0,19,male,corrected,not color blind

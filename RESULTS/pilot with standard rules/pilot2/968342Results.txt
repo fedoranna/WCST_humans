@@ -1,0 +1,4 @@
+wcst,968342,1,1,explore,n,qy3C,tr2,false,655,2416
+wcst,968342,2,2,explore,n,sg2B,tg2,true,648,1779
+wcst,968342,3,3,explore,n,sg2B,ty3,false,631,1676
+wcst,968342,4,4,explore,n,qy3C,cy2,false,792,1644

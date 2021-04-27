@@ -1,0 +1,58 @@
+786796,45,female,corrected,arbeiter,right
+140968,44,male,corrected,professor,left
+818292,77,male,corrected,fd,left
+166349,12,female,corrected,fdds,right
+816780,36,female,normal,c,right
+851653,3,female,normal,3,right
+593170,d,female,normal,d,right
+309851,d,female,normal,d,right
+350533,34,female,normal,34,right
+142611,344,female,normal,3434,ambi
+208348,3434,male,corrected,34,ambi
+8836,34,male,normal,34,ambi
+927022,34,female,corrected,34,ambi
+403345,34,male,corrected,34,ambi
+477517,30,female,corrected,student,right
+963083,25,female,corrected,art student,right
+19123,29,male,normal,student,right
+19123,29,male,corrected,student,right
+233019,29,male,corrected,student,right
+295418,25,female,corrected,art student,right
+992358,31,female,corrected,employee,right
+329422,33,male,corrected,teacher,left
+232879,29,female,corrected,teacher,right
+28977,399,male,normal,employee,right
+546960,399,male,normal,employee,right
+757143,39,male,normal,employee,right
+242040,39,male,normal,employee,right
+776100,31,female,normal,professional self-employment,right
+180328,31,male,corrected,freelance journalist,right
+958461,31,male,corrected,freelancer,right
+500849,32,female,corrected,employee,right
+142183,31,male,corrected,blatest,right
+356177,37,female,normal,student,right
+390873,31,female,corrected,employee,right
+558552,31,female,corrected,employee,right
+480024,30,female,corrected,This is Franzi, testing things.,right
+482220,31,female,corrected,employee,right
+433168,23,male,corrected,Kd,left
+495956,22,female,corrected,worker,ambi
+260000,56,male,corrected,student,left
+895029,343,female,normal,23,ambi
+823189,36,female,corrected,researcher,right
+731873,3434,male,corrected,34,ambi
+556874,45,female,corrected,df,ambi
+405616,fd,female,corrected,df,ambi
+534331,44,male,corrected,34,ambi
+469523,45,male,normal,34,ambi
+488669,34,female,normal,34,ambi
+877648,34,male,normal,34,ambi
+469946,34,male,normal,343,ambi
+178897,34,female,normal,34,ambi
+860936,df,female,normal,f,left
+672454,df,male,normal,df,ambi
+259228,45,male,normal,5,ambi
+430507,34,male,normal,23,ambi
+762799,36,female,normal,employee,right
+667880,24,female,corrected,student,ambi
+968342,34,male,corrected,34,ambi

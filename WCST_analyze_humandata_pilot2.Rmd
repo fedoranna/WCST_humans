@@ -86,6 +86,10 @@ From the raw data, I calculated some additional variables, such as:
 * Random search: this is TRUE if none of the rules applies to the current rule (if the number of applied rules = 1)
 * Perseveration error: after a "success", we check if the participant keeps using the same rule (if the applied rule - or one of the applied rules - is the same as the current rule in the successful step) for any number of moves
 
+RANDOM SEARCH: NOT STICKING TO ONE RULE FOR MORE THAN 2 MOVES; PAYING ATTENTION TO THE FEEDBACK
+
+IGNORING FEEDBACK
+
 ```{r variables per move, warning = FALSE}
 # Create think_time variable
 alldata <- mutate(alldata, think_time = total_time - mv_time)
@@ -251,10 +255,20 @@ In our plans we had the following testable hypotheses:
 * Exclude participants who did not find out the standard rules?
 * Exclude participants who stay inactive for more than a certain amount of time?
 * Exclude participants who respond too quickly?
+Who did not do the questionnaire
+Who were inactive for more than 1 minute
+For spatial rule: who did not solve the other rules
+if std and sp rule is last: if they only make one mistake
+if std and sp rule is first: if they only make three mistake
+if moon: if they make 0 mistake
 
 ## Statistical tests
 
 For deciding whether solving the task in one condition is more difficult than solving it in another, we can use two variables: solution rates and solution times. As for the solution rates, we can construct a four-by-two contingency table (number of solvers and non-solvers in the four conditions). Analyzing a larger than two-by-two contingency table is possible with a Chi-square test, but it is only useful if the categories defining the rows are arranged in a natural order with equal spacing between rows. This is not true in our case, so we will have to analyze two-by-two contingency tables instead, separately for Hypothesis 1 and Hypothesis 2. We chose Fisher's exact test, which is supposed to be more exact than the Chi-square test, especially if the cells in the contingency table contain small values.
+OR BONFERRONI CORRECTION
+
+BINARY LOGISTIC REGRESSION, persev could be a predictor
+less persev -> more likely to find sp rule
 
 Solution rates in the four conditions:
 ```{r soution rates df}

@@ -1,0 +1,35 @@
+wcst,786796,all about thinking,many many times,3,ahllo
+wcstc,140968,mache,dich,mein,Herz so rein
+wcsth,818292,all about thinkign and problem sovling,hello again,30,Yes great stuff
+wcsthc,166349,dfddf,df,df,df
+wcst,816780,,,,
+wcstc,851653,,,,
+wcsth,593170,,,,
+wcsthc,309851,,,,
+wcst,477517,To see how one finds out the underlying patterns.,No.,50,This is Franziska, so I just tried this out to see whether it works all right.
+wcstc,233019,No idea,No,30,
+wcstc,295418,No idea...,Yes, but then the AHA disappear because all start to be incorrect again...  and I didn't understand the logic with the moons.,70,
+wcstc,992358,Whether someone is focussing on color, form or pattern.,Yes, when I realized it was just the laying pattern.,70,
+wcst,329422,Trying to find out how I try to find the right categories for the cards.,Yes, I have. I experienced it after the second card when I first noticed how it worked. I had the second AHA! after the first change of matching pattern.,50,The pattern for matching the cards changed during the experiment.....didn't it? 
+:-)
+wcstc,232879,,yes,50,
+wcst,757143,Train the test person on &quot;correct&quot; patterns, but with changing rules (obviously, the &quot;correct&quot; rating adjusted during the test - once, it was colour match, later it was shape match). See how / when test person realizes that pattern was changed.,2-3 AHA! experienced when pattern was found.,70,none
+wcst,242040,,,,
+wcstf,776100,Adaptability.,yes,20,
+wcstf,958461,no idea...,Sometimes I thought so, but then it didn't work out...,90,extremely frustrating, I didn't get it at all.
+wcstfc,500849,To see if you have to match the colors or the forms and how long it takes to think in a different direction.,yes.,60,it is frustrating not getting directions and trying to figure out what is expected.
+wcstfc,480024,,,,
+wcstfc,482220,to recognise patterns,yes,60,it would be good to have a disclaimer at the beginning that informs participants that the experiment is not faulty, although the first card does not change for quite some time
+wcstfc,895029,df,df,df,df
+wcst,823189,No idea! :),No,78,-
+wcst,534331,,,,
+wcst,469523,,,,
+wcstf,488669,,,,
+wcstf,877648,,,,
+wcst,469946,,,,
+wcstf,178897,,,,
+wcstc,860936,,,,
+wcstc,672454,,,,
+wcstfc,259228,,,,
+wcstc,430507,,,,
+wcstfc,762799,,,,

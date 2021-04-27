@@ -1,0 +1,449 @@
+wcst,786796,Login,10:11:00,22.03.2016,1458637860
+wcst,786796,Informed consent,10:11:03
+wcst,786796,Datasheet,10:11:08
+wcst,786796,Datasheet,10:11:32
+wcst,786796,Instruction,10:11:32
+wcst,786796,WCST,10:11:35
+wcst,786796,Survey,10:13:42
+wcstc,140968,Login,10:16:36,22.03.2016,1458638196
+wcstc,140968,Informed consent,10:16:41
+wcstc,140968,Datasheet,10:16:44
+wcstc,140968,Datasheet,10:17:02
+wcstc,140968,Instruction,10:17:02
+wcstc,140968,WCSTC,10:17:04
+wcstc,140968,Survey,10:20:16
+wcsth,818292,Login,10:20:50,22.03.2016,1458638450
+wcsth,818292,Informed consent,10:20:55
+wcsth,818292,Datasheet,10:20:58
+wcsth,818292,Datasheet,10:21:08
+wcsth,818292,Instruction,10:21:09
+wcsth,818292,WCST,10:21:10
+wcsth,818292,Survey,10:23:52
+wcsthc,166349,Login,10:24:44,22.03.2016,1458638684
+wcsthc,166349,Informed consent,10:24:49
+wcsthc,166349,Datasheet,10:24:52
+wcsthc,166349,Datasheet,10:25:06
+wcsthc,166349,Instruction,10:25:06
+wcsthc,166349,WCSTC,10:25:08
+wcsthc,166349,Survey,10:27:17
+wcst,816780,Login,09:33:47,24.03.2016,1458808427
+wcst,816780,Informed consent,09:34:15
+wcst,816780,Datasheet,09:34:46
+wcst,816780,Datasheet,09:35:35
+wcst,816780,Datasheet,09:35:37
+wcst,816780,Datasheet,09:35:43
+wcst,816780,Datasheet,09:36:20
+wcst,816780,Datasheet,09:36:28
+wcst,816780,Instruction,09:36:28
+wcst,816780,WCST,09:37:35
+wcst,816780,Survey,09:47:06
+wcstc,851653,Login,09:47:33,24.03.2016,1458809253
+wcstc,851653,Informed consent,09:50:21
+wcstc,851653,Datasheet,09:54:38
+wcstc,851653,Datasheet,09:54:45
+wcstc,851653,Datasheet,09:57:33
+wcstc,851653,Instruction,09:57:34
+wcstc,851653,WCSTC,10:04:31
+wcstc,851653,Survey,10:08:12
+wcsth,593170,Login,10:11:15,24.03.2016,1458810675
+wcsth,593170,Informed consent,10:11:23
+wcsth,593170,Datasheet,10:11:26
+wcsth,593170,Datasheet,10:11:31
+wcsth,593170,Instruction,10:11:31
+wcsth,593170,WCST,10:11:34
+wcsth,593170,Survey,10:15:59
+wcsthc,309851,Login,10:16:33,24.03.2016,1458810993
+wcsthc,309851,Informed consent,10:16:36
+wcsthc,309851,Datasheet,10:16:43
+wcsthc,309851,Datasheet,10:16:51
+wcsthc,309851,Instruction,10:16:51
+wcsthc,309851,WCSTC,10:16:53
+wcsthc,309851,Survey,10:19:20
+wcst,350533,Login,15:26:51,11.05.2016,1462973211
+wcst,350533,Informed consent,15:27:00
+wcst,350533,Datasheet,15:27:04
+wcst,350533,Datasheet,15:27:10
+wcst,350533,Instruction,15:27:10
+wcst,350533,WCST,15:27:11
+wcstfc,142611,Login,15:52:46,11.05.2016,1462974766
+wcstfc,142611,Informed consent,15:52:48
+wcstfc,142611,Datasheet,15:52:52
+wcstfc,142611,Datasheet,15:53:05
+wcstfc,142611,Instruction,15:53:05
+wcstfc,142611,WCSTC,15:53:07
+wcst,208348,Login,15:56:18,11.05.2016,1462974978
+wcst,208348,Informed consent,15:56:20
+wcst,208348,Datasheet,15:56:24
+wcst,208348,Datasheet,15:56:36
+wcst,208348,Instruction,15:56:36
+wcst,208348,WCST,15:56:38
+wcstf,8836,Login,15:57:36,11.05.2016,1462975056
+wcstf,8836,Informed consent,15:57:38
+wcstf,8836,Datasheet,15:57:41
+wcstf,8836,Datasheet,15:57:50
+wcstf,8836,Instruction,15:57:50
+wcstf,8836,WCST,15:57:52
+wcstc,927022,Login,15:58:19,11.05.2016,1462975099
+wcstc,927022,Informed consent,15:58:21
+wcstc,927022,Datasheet,15:58:24
+wcstc,927022,Datasheet,15:58:35
+wcstc,927022,Instruction,15:58:35
+wcstc,927022,WCSTC,15:58:38
+wcstfc,26805,Login,16:03:05,11.05.2016,1462975385
+wcst,785641,Login,21:36:29,14.05.2016,1463254589
+wcst,403345,Login,13:33:07,01.06.2016,1464780787
+wcst,403345,Informed consent,13:33:09
+wcst,403345,Datasheet,13:33:13
+wcst,403345,Datasheet,13:33:25
+wcst,403345,Datasheet,13:33:30
+wcst,403345,Instruction,13:33:30
+wcst,403345,WCST,13:33:32
+wcst,817179,Login,15:04:55,06.06.2016,1465218295
+wcst,830619,Login,16:30:33,09.06.2016,1465482633
+wcst,477517,Login,16:15:34,12.06.2016,1465740934
+wcst,477517,Informed consent,16:15:44
+wcst,477517,Datasheet,16:15:53
+wcst,477517,Datasheet,16:16:09
+wcst,477517,Instruction,16:16:09
+wcst,477517,WCST,16:16:29
+wcst,477517,Survey,16:20:53
+wcstc,963083,Login,16:48:51,12.06.2016,1465742931
+wcstc,963083,Informed consent,16:49:09
+wcstc,963083,Datasheet,16:49:25
+wcstc,963083,Datasheet,16:50:31
+wcstc,963083,Instruction,16:50:31
+wcstc,963083,WCSTC,16:54:30
+wcstc,963083,WCSTC,16:58:58
+wcstc,963083,WCSTC,17:01:18
+wcstc,19123,Login,17:10:45,12.06.2016,1465744245
+wcstc,19123,Informed consent,17:10:59
+wcstc,19123,Datasheet,17:11:19
+wcstc,19123,Datasheet,17:11:37
+wcstc,19123,Instruction,17:11:37
+wcstc,19123,Datasheet,17:11:40
+wcstc,19123,Datasheet,17:11:45
+wcstc,19123,Instruction,17:11:45
+wcstc,19123,WCSTC,17:13:06
+wcstc,233019,Login,17:20:14,12.06.2016,1465744814
+wcstc,233019,Informed consent,17:20:16
+wcstc,233019,Datasheet,17:20:20
+wcstc,233019,Datasheet,17:20:34
+wcstc,233019,Instruction,17:20:34
+wcstc,295418,Login,17:20:43,12.06.2016,1465744843
+wcstc,295418,Informed consent,17:20:48
+wcstc,295418,Datasheet,17:20:52
+wcstc,295418,Datasheet,17:21:04
+wcstc,295418,Instruction,17:21:05
+wcstc,233019,WCSTC,17:21:07
+wcstc,295418,WCSTC,17:21:07
+wcstc,233019,Survey,17:24:39
+wcstc,295418,Survey,17:26:10
+wcstc,992358,Login,18:40:51,12.06.2016,1465749651
+wcstc,992358,Informed consent,18:41:00
+wcstc,992358,Datasheet,18:41:12
+wcstc,992358,Datasheet,18:41:33
+wcstc,992358,Instruction,18:41:33
+wcstc,992358,WCSTC,18:42:51
+wcstc,992358,Survey,18:52:18
+wcst,329422,Login,20:27:06,12.06.2016,1465756026
+wcst,329422,Informed consent,20:28:00
+wcst,329422,Datasheet,20:28:29
+wcst,329422,Datasheet,20:28:52
+wcst,329422,Instruction,20:28:52
+wcst,329422,WCST,20:29:33
+wcst,329422,Survey,20:35:25
+wcstc,232879,Login,21:24:05,12.06.2016,1465759445
+wcstc,232879,Informed consent,21:24:13
+wcstc,232879,Datasheet,21:24:38
+wcstc,232879,Datasheet,21:26:56
+wcstc,232879,Instruction,21:26:56
+wcstc,232879,WCSTC,21:28:05
+wcstc,232879,Survey,21:33:52
+wcst,28977,Login,08:13:46,13.06.2016,1465798426
+wcst,28977,Informed consent,08:15:27
+wcst,28977,Datasheet,08:16:46
+wcst,28977,Datasheet,08:17:25
+wcst,28977,Instruction,08:17:25
+wcst,28977,WCST,08:18:04
+wcst,546960,Login,08:21:28,13.06.2016,1465798888
+wcst,546960,Informed consent,08:21:32
+wcst,546960,Datasheet,08:21:34
+wcst,546960,Datasheet,08:21:52
+wcst,546960,Instruction,08:21:52
+wcst,546960,WCST,08:22:48
+wcst,757143,Login,11:39:34,13.06.2016,1465810774
+,,Informed consent,11:39:40
+wcst,757143,Informed consent,11:39:43
+,,Datasheet,11:39:48
+,,Datasheet,11:39:48
+wcst,757143,Datasheet,11:39:49
+,,Datasheet,11:39:53
+wcst,757143,Datasheet,11:40:01
+,,Instruction,11:40:02
+wcst,757143,Instruction,11:40:05
+,,Instruction,11:40:08
+,,WCST,11:40:15
+wcst,757143,WCST,11:40:15
+,,Instruction,11:40:16
+wcst,757143,Survey,11:48:18
+wcst,242040,Login,11:48:52,13.06.2016,1465811332
+wcst,242040,Informed consent,11:48:54
+wcst,242040,Datasheet,11:48:57
+wcst,242040,Datasheet,11:49:11
+wcst,242040,Datasheet,11:49:17
+wcst,242040,Instruction,11:49:17
+wcst,242040,WCST,11:49:19
+wcst,242040,Survey,11:52:34
+wcstf,33781,Login,13:56:58,13.06.2016,1465819018
+wcstfc,715950,Login,13:57:38,13.06.2016,1465819058
+wcstfc,554275,Login,14:01:00,13.06.2016,1465819260
+wcstf,832579,Login,14:02:53,13.06.2016,1465819373
+wcstf,776100,Login,14:07:33,13.06.2016,1465819653
+wcstf,776100,Informed consent,14:07:59
+wcstf,776100,Informed consent,14:08:23
+wcstf,776100,Datasheet,14:08:52
+wcstf,776100,Datasheet,14:10:35
+wcstf,776100,Instruction,14:10:36
+wcstf,776100,WCST,14:11:18
+wcstf,180328,Login,14:12:34,13.06.2016,1465819954
+wcstf,180328,Informed consent,14:12:51
+wcstf,180328,Datasheet,14:13:56
+wcstf,180328,Datasheet,14:14:17
+wcstf,180328,Instruction,14:14:17
+wcstf,180328,WCST,14:14:49
+wcstf,180328,Instruction,14:15:27
+wcstf,180328,WCST,14:15:49
+wcstf,776100,Survey,14:20:34
+wcstf,180328,Instruction,14:21:04
+wcstf,180328,WCST,14:21:21
+wcstf,958461,Login,14:27:30,13.06.2016,1465820850
+wcstf,958461,Informed consent,14:27:32
+wcstf,958461,Datasheet,14:27:36
+wcstf,958461,Datasheet,14:27:52
+wcstf,958461,Instruction,14:27:52
+wcstf,958461,WCST,14:27:54
+wcstf,958461,Survey,14:37:16
+wcstfc,500849,Login,14:42:04,13.06.2016,1465821724
+wcstfc,500849,Informed consent,14:42:17
+wcstfc,500849,Datasheet,14:42:34
+wcstfc,500849,Datasheet,14:43:09
+wcstfc,500849,Instruction,14:43:10
+wcstfc,500849,WCSTC,14:43:42
+wcstf,142183,Login,14:44:26,13.06.2016,1465821866
+wcstf,142183,Informed consent,14:44:28
+wcstf,142183,Datasheet,14:44:30
+wcstf,142183,Datasheet,14:44:43
+wcstf,142183,Instruction,14:44:43
+wcstf,142183,WCST,14:44:48
+wcstfc,500849,Survey,14:51:04
+wcstf,356177,Login,21:36:29,14.06.2016,1465932989
+wcstf,356177,Informed consent,21:36:36
+wcstf,356177,Datasheet,21:37:44
+wcstf,356177,Datasheet,21:38:33
+wcstf,356177,Instruction,21:38:33
+wcstf,356177,WCST,21:39:40
+wcstf,356177,WCST,21:46:29
+,,WCST,23:11:56
+,,WCST,23:12:46
+wcstfc,390873,Login,13:07:03,22.06.2016,1466593623
+wcstfc,390873,Informed consent,13:07:19
+wcstfc,390873,Datasheet,13:07:35
+wcstfc,390873,Datasheet,13:07:53
+wcstfc,390873,Instruction,13:07:53
+wcstfc,390873,WCSTC,13:08:21
+wcstfc,390873,Instruction,13:08:40
+wcstfc,390873,WCSTC,13:09:19
+wcstfc,558552,Login,13:09:56,22.06.2016,1466593796
+wcstfc,558552,Informed consent,13:09:58
+wcstfc,558552,Datasheet,13:10:05
+wcstfc,558552,Datasheet,13:10:14
+wcstfc,558552,Instruction,13:10:14
+wcstfc,558552,WCSTC,13:10:36
+wcstfc,480024,Login,13:55:55,22.06.2016,1466596555
+wcstfc,480024,Informed consent,13:55:57
+wcstfc,480024,Datasheet,13:56:00
+wcstfc,480024,Datasheet,13:56:17
+wcstfc,480024,Instruction,13:56:17
+wcstfc,480024,WCSTC,13:56:19
+wcstfc,480024,Survey,13:58:40
+,,WCSTC,14:01:54
+wcstfc,482220,Login,15:53:07,22.06.2016,1466603587
+wcstfc,482220,Informed consent,15:53:10
+wcstfc,482220,Datasheet,15:53:14
+wcstfc,482220,Datasheet,15:53:23
+wcstfc,482220,Instruction,15:53:23
+wcstfc,482220,WCSTC,15:53:25
+wcstfc,482220,Survey,15:57:47
+wcst,433168,Login,15:51:21,13.07.2016,1468417881
+wcst,433168,Informed consent,15:51:39
+wcst,433168,Datasheet,15:51:44
+wcst,433168,Datasheet,15:52:21
+wcst,433168,Instruction,15:52:22
+wcst,433168,WCST,15:52:25
+,,WCST,13:41:03
+wcstfc,421187,Login,11:04:19,13.09.2016,1473757459
+wcstfc,421187,Informed consent,11:04:28
+wcstfc,421187,Datasheet,11:04:36
+wcstfc,233457,Login,11:06:48,13.09.2016,1473757608
+wcstfc,233457,Informed consent,11:20:56
+wcstfc,233457,Informed consent,11:20:58
+wcstfc,495956,Login,11:21:43,13.09.2016,1473758503
+wcstfc,495956,Informed consent,11:21:48
+wcstfc,495956,Datasheet,11:21:53
+wcstfc,495956,Datasheet,11:22:32
+wcstfc,495956,Instruction,11:22:32
+wcstfc,495956,WCSTC,11:22:34
+wcstfc,260000,Login,11:25:31,13.09.2016,1473758731
+wcstfc,260000,Informed consent,11:25:33
+wcstfc,260000,Datasheet,11:25:36
+wcstfc,260000,Datasheet,11:26:11
+wcstfc,260000,Instruction,11:26:11
+wcstfc,260000,WCSTC,11:26:13
+wcstfc,260000,WCST,11:26:23
+wcstfc,895029,Login,11:31:03,13.09.2016,1473759063
+wcstfc,895029,Informed consent,11:31:07
+wcstfc,895029,Datasheet,11:31:09
+wcstfc,895029,Datasheet,11:31:18
+wcstfc,895029,Instruction,11:31:18
+wcstfc,895029,WCSTC,11:31:20
+wcstfc,895029,WCSTC,11:35:35
+wcstfc,895029,WCSTC,11:35:37
+wcstfc,895029,WCSTC,11:35:51
+wcstfc,895029,WCSTC,11:39:25
+wcstfc,895029,WCSTC,11:41:46
+wcstfc,895029,Survey,11:44:28
+wcst,823189,Login,14:00:36,15.09.2016,1473940836
+wcst,823189,Informed consent,14:06:21
+wcst,823189,Datasheet,14:10:39
+wcst,823189,Datasheet,14:11:09
+wcst,823189,Instruction,14:11:10
+wcst,823189,WCST,14:12:52
+wcst,823189,Survey,14:24:27
+wcst,731873,Login,16:39:43,15.09.2016,1473950383
+wcst,731873,Informed consent,16:39:50
+wcst,731873,Datasheet,16:39:57
+wcst,731873,Datasheet,16:40:08
+wcst,731873,Instruction,16:40:08
+wcst,731873,Instruction,16:50:01
+wcst,731873,WCST,16:50:07
+wcst,556874,Login,08:43:26,16.09.2016,1474008206
+wcst,556874,Informed consent,08:43:36
+wcst,556874,Datasheet,08:43:40
+wcst,556874,Datasheet,08:44:07
+wcst,556874,Instruction,08:44:07
+wcst,556874,WCST,08:44:11
+wcst,556874,WCST,08:45:25
+wcst,556874,WCST,08:49:11
+wcst,405616,Login,08:52:34,16.09.2016,1474008754
+wcst,405616,Informed consent,08:52:37
+wcst,405616,Datasheet,08:52:40
+wcst,405616,Datasheet,08:52:49
+wcst,405616,Datasheet,08:52:53
+wcst,405616,Instruction,08:52:53
+wcst,405616,WCST,08:52:57
+wcst,405616,WCST,08:57:20
+wcst,405616,WCST,09:02:23
+wcst,534331,Login,09:33:35,16.09.2016,1474011215
+wcst,534331,Informed consent,09:35:25
+wcst,534331,Datasheet,09:35:29
+wcst,534331,Datasheet,09:35:40
+wcst,534331,Instruction,09:35:40
+wcst,534331,WCST,09:35:42
+wcst,534331,Survey,09:42:52
+wcst,469523,Login,10:05:17,16.09.2016,1474013117
+wcst,469523,Informed consent,10:05:20
+wcst,469523,Datasheet,10:05:22
+wcst,469523,Datasheet,10:05:32
+wcst,469523,Instruction,10:05:32
+wcst,469523,WCST,10:05:34
+wcst,469523,Survey,10:07:23
+wcstf,488669,Login,10:11:35,16.09.2016,1474013495
+wcstf,488669,Informed consent,10:11:40
+wcstf,488669,Datasheet,10:11:44
+wcstf,488669,Datasheet,10:11:51
+wcstf,488669,Datasheet,10:11:54
+wcstf,488669,Instruction,10:11:54
+wcstf,488669,WCST,10:11:57
+wcstf,488669,Survey,10:13:49
+wcstf,877648,Login,10:21:27,16.09.2016,1474014087
+wcstf,877648,Informed consent,10:21:29
+wcstf,877648,Datasheet,10:21:33
+wcstf,877648,Datasheet,10:21:40
+wcstf,877648,Instruction,10:21:40
+wcstf,877648,WCST,10:21:42
+wcstf,877648,Survey,10:22:46
+wcst,469946,Login,14:10:55,19.09.2016,1474287055
+wcst,469946,Informed consent,14:10:57
+wcst,469946,Datasheet,14:11:00
+wcst,469946,Datasheet,14:11:11
+wcst,469946,Instruction,14:11:11
+wcst,469946,WCST,14:11:13
+wcst,469946,Survey,14:12:08
+wcstf,178897,Login,14:13:41,19.09.2016,1474287221
+wcstf,178897,Informed consent,14:13:44
+wcstf,178897,Datasheet,14:13:49
+wcstf,178897,Datasheet,14:13:55
+wcstf,178897,Datasheet,14:13:59
+wcstf,178897,Instruction,14:13:59
+wcstf,178897,WCST,14:14:01
+wcstf,178897,Survey,14:14:38
+wcstc,860936,Login,14:15:30,19.09.2016,1474287330
+wcstc,860936,Informed consent,14:15:32
+wcstc,860936,Datasheet,14:15:35
+wcstc,860936,Datasheet,14:15:44
+wcstc,860936,Instruction,14:15:44
+wcstc,860936,WCSTC,14:15:46
+wcstc,860936,Survey,14:16:36
+wcstc,672454,Login,14:17:06,19.09.2016,1474287426
+wcstc,672454,Informed consent,14:17:08
+wcstc,672454,Datasheet,14:17:11
+wcstc,672454,Datasheet,14:17:19
+wcstc,672454,Instruction,14:17:20
+wcstc,672454,WCSTC,14:17:21
+wcstc,672454,Survey,14:17:54
+wcstfc,259228,Login,14:18:41,19.09.2016,1474287521
+wcstfc,259228,Informed consent,14:18:43
+wcstfc,259228,Datasheet,14:18:48
+wcstfc,259228,Datasheet,14:18:57
+wcstfc,259228,Instruction,14:18:57
+wcstfc,259228,WCSTC,14:18:59
+wcstfc,259228,Survey,14:19:37
+wcstc,430507,Login,14:22:37,19.09.2016,1474287757
+wcstc,430507,Informed consent,14:22:39
+wcstc,430507,Datasheet,14:22:42
+wcstc,430507,Datasheet,14:22:53
+wcstc,430507,Instruction,14:22:54
+wcstc,430507,WCSTC,14:22:56
+wcstc,430507,Survey,14:25:25
+wcst,445451,Login,13:31:59,20.10.2016,1476963119
+wcstc,920577,Login,16:06:02,20.10.2016,1476972362
+wcstc,920577,Informed consent,16:06:29
+wcstc,920577,Datasheet,16:06:34
+wcstc,920577,Datasheet,16:07:29
+wcstc,920577,Datasheet,16:18:43
+wcst,742431,Login,16:22:15,20.10.2016,1476973335
+wcstf,642803,Login,16:22:38,20.10.2016,1476973358
+wcstc,187530,Login,16:23:15,20.10.2016,1476973395
+wcstfc,762799,Login,16:23:28,20.10.2016,1476973408
+wcstfc,762799,Informed consent,16:24:15
+wcstfc,762799,Datasheet,16:24:18
+wcstfc,762799,Datasheet,16:25:04
+wcstfc,762799,Instruction,16:25:04
+wcstfc,762799,WCSTC,16:25:10
+wcstfc,762799,Survey,16:31:56
+wcst,440140,Login,21:20:36,20.10.2016,1476991236
+wcst,667880,Login,10:01:04,21.10.2016,1477036864
+wcst,667880,Informed consent,10:01:13
+wcst,667880,Datasheet,10:01:17
+wcst,667880,Datasheet,10:01:40
+wcst,667880,Instruction,10:01:40
+wcst,667880,WCST,10:02:00
+wcst,667880,Instruction,10:02:06
+wcst,667880,WCST,10:02:39
+wcst,968342,Login,11:41:21,21.10.2016,1477042881
+wcst,968342,Informed consent,11:41:27
+wcst,968342,Datasheet,11:41:30
+wcst,968342,Datasheet,11:41:46
+wcst,968342,Datasheet,11:41:49
+wcst,968342,Instruction,11:41:49
+wcst,968342,WCST,11:41:51

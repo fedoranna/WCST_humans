@@ -1,0 +1,38 @@
+786796,45,female,corrected,arbeiter,right
+140968,44,male,corrected,professor,left
+818292,77,male,corrected,fd,left
+166349,12,female,corrected,fdds,right
+816780,36,female,normal,c,right
+851653,3,female,normal,3,right
+593170,d,female,normal,d,right
+309851,d,female,normal,d,right
+350533,34,female,normal,34,right
+142611,344,female,normal,3434,ambi
+208348,3434,male,corrected,34,ambi
+8836,34,male,normal,34,ambi
+927022,34,female,corrected,34,ambi
+403345,34,male,corrected,34,ambi
+477517,30,female,corrected,student,right
+963083,25,female,corrected,art student,right
+19123,29,male,normal,student,right
+19123,29,male,corrected,student,right
+233019,29,male,corrected,student,right
+295418,25,female,corrected,art student,right
+992358,31,female,corrected,employee,right
+329422,33,male,corrected,teacher,left
+232879,29,female,corrected,teacher,right
+28977,399,male,normal,employee,right
+546960,399,male,normal,employee,right
+757143,39,male,normal,employee,right
+242040,39,male,normal,employee,right
+776100,31,female,normal,professional self-employment,right
+180328,31,male,corrected,freelance journalist,right
+958461,31,male,corrected,freelancer,right
+500849,32,female,corrected,employee,right
+142183,31,male,corrected,blatest,right
+356177,37,female,normal,student,right
+390873,31,female,corrected,employee,right
+558552,31,female,corrected,employee,right
+480024,30,female,corrected,This is Franzi, testing things.,right
+482220,31,female,corrected,employee,right
+433168,23,male,corrected,Kd,left

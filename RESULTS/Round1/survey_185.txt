@@ -1,0 +1,129 @@
+wlin|1|To sort cards according to their category.|Yes, the rule was to place the card into the group according to whether it was labelled A, B, C, or D.|yes aha|1|
+wlin|1|To sort cards according to their category.|Yes, the rule was to place the card into the group according to whether it was labelled A, B, C, or D.|yes aha|1|
+wlout|2|I think the goal was to see if colour made a difference to the choice I made.|No, the only rule was the letter telling us where to put the card.|yes aha|2|
+moonsq|5|To figure out you had to put the cards on the piles in a 1, 2, 3, 4 pattern|1, 2, 3, 4, that was the rule. I thought at first it was to do with moons and stars or 4 then 5.|yes aha|5|Fun little game
+wlout|9|To see the amount ofc ards the player would go through before they arrived at the correct sorting method.|Match the letters.|yes aha|2|
+wonly|7|Unsure as there were no colours or shapes just black letters.|I matched the letters - A to A etc.|yes aha|2|
+wonly|14|Decision making and how we automatically class things in groups|The letter on the cards should match|no aha|1|
+wnol|3|To see how long it takes different people to work out the pattern of the card game and what you have to do in order to achieve correct answers.|I found that the card I was sorting had to be dragged onto a keycard that was in every way different. It could not have the same number of shapes. It could not have the same type of shape. It could not be the same colour.|yes aha|3|No
+wnol|17|to see how long it takes for someone to realise the rules following multiple incorrect answers|The card that does not match the existing card on colour, shape or number.|yes aha|50|
+wlin|8|To see how quickly people can differentiate between colour number and letter|the rule was the same letter on the singular card was to be matched with the card above|yes aha|2|
+wonly|21|Does an individuals ability to match two objects change over time? e.g. concentration decrease|No|no aha|2|
+wnolfs|6|See if I could figure out the pattern or training an AI|Yes, it was the one that did not match the colour, shape or number.|yes aha|6|I hope I'm not training an AI
+moonsq|12|I honestly cant think of a goal I achieved while doing that.|The rule was to start on the left and move right covering each key card.|yes aha|6|
+wlin|29|do not know|letters|no aha|2|
+wlout|16|to see what people sorted by - how colour and shape and pattern would influence|yes it was the letter under the car to the corresponding deck but it took me ages to realise as i was concentrating on colour number shape adding them together|yes aha|5|i was concerned that there was no end
+wlout|30|I'm not sure|Go by the letters underneath the cards and match them.|yes aha|3|
+wonly|35|I have no idea|put the cards to the same letter|yes aha|4|no
+wnol|24|to figure out how to sort the cards|sort it together with a card that has nothing in common with it.|yes aha|5|
+wlout|23|I think it was to see if you would naturally follow the shapes and colors on the card to classify them or if you would take note of the letter below the deck which tells you where to place them.|The letter below the deck indicated where the card should be placed.|yes aha|2|It was good because it made sure that I double checked to see that I wasn't rushing through it and missed a letter below the deck. One tends to get complacent once you know the formula.
+moonsq|19|Frustration of the participant.|Possibly - order of 2nd card, third card, fourth card, first card.|yes aha|10|I thought my computer was not working correctly - still not convinced that it was alright.
+wonly|49|not sure|no|no aha|1|
+moonsq|47|To work out the rule to the card game without being given any instruction.|Yes, To start from 1 to 4 and place them accordingly on each card.|yes aha|7|
+wonly|42|To test how quickly a person can complete the task.|No particular rule just aimed to complete it as quickly as I could.|yes aha|1|I enjoyed this experiment - Thank you
+||To  determine how quickly I found the correct rule, as different information on the card indicated it should be sorted into different areas|Sort by letter
+|||Found it after the first card|yes aha|1|Fun
+moonsq|26|To sort the cards and find a pattern|Yes. Put a card on each pile starting from the left.|yes aha|8|
+||Testing how we experimented with different options for sorting before coming to a conclusion|It was sorting based on the letter on the cards and nothing else.|yes aha|3|I somehow ignored the letter on the deck cards, and thought they were only there to label the key cards. I tried color, shape and number sorting, then ended up thinking it was something more complex before finally realising I had neglected the letters.
+||To see how long it took to recognise a pattern|Yes but it took a while. The rule was to place it on the card that was completely unrelated to the colour, number or shape on the other card|yes aha|7|
+moonsq|40|Seeing if random patterns affecting the choice of card|Not throughout, but then at the end they went from left to right|yes aha|2|
+wlout|44|To see how long it takes for the person to think outside the box or to be more aware of their surroundings|the card went to the whatever place was dictated by the letter under the deck at the time.|yes aha|4|
+wlin|15|To see how people process pattern recognition in puzzles.|It cant be the same color, shape, or number of shapes on the cards you put on the previous one.|yes aha|4|Thanks for the opportunity.
+||To test whether the number of shapes on the card or color impacted where you put the card|I sorted by letter.|yes aha|1|
+wnolfs|27|To have someone learn the algorithm of the decks sorting system.|The rule for sorting was to pair each card to another card that had no similarities to it. Ie: Shape, Color, Quantity.|yes aha|6|Felt fulfilling to figure out the algorithm. :)
+||To investigate how people determine and apply rules|Yes, the rule was to sort the cards by letter, rather than shape or colour|yes aha|3|
+||To determine how quickly people determine the sorting rule.|Yes, but it took me an embarrassing amount of time. I first tried by colour, then type of symbol, then number of symbols. None worked and I was very confused, then realized that each card had a letter: That was the rule! But the automatic impulse was still hard to overwrite, and I still sorted a few based on colour or number.|yes aha|7|n/a
+||figure out the rule for sorting objects with different variables.|fit the cards according to the letters.|yes aha|1|no.
+||figure out the rule for sorting objects with different variables.|fit the cards according to the letters.|yes aha|1|no.
+||Matching letters or coloured shapes.|If the shapes don't match, match the letters instead.|yes aha|1|
+wlin|43|Organizational skills|Yes, the derk cards had the matched letter for the key cards.|yes aha|5|None
+wlin|36|Something about how people work out a rule when they have to guess and are given feedback|The card went on the pile in which none of the characteristics matched the card drawn from the deck e.g. a one red square card could not go on the pile with a one symbol card, nor the pile wiht red symbols, nor the pile with square symbols. So you had to look at each pile in turn to do the task rather than it being simple matching of colour, shape or number|yes aha|3|
+||To test your reasoning powers.|The cards should have just been sorted by matching them with the corresponding letter. The colour and pattern on the cards were irrelevant.|yes aha|6|It took me too long to see the obvious and easiest solution. I assumed the cards should be sorted into corresponding colours or patterns.
+||sort out objects according to one common variable|sort cards according to letters|yes aha|1|no.
+wnolfs|13|I Personally think the goal of the experiment was to see wether or not the code of the game works ( to see if cards can be placed into a box) because i couldnt find a pattern to it, random cards could be placed|No|no aha|6|Please make the game much more exciting and give out an example of how the game should be played at the beginning of the game.
+wnol|38|Not sure.|Each 'key' card should fit with one of the top cards by following the rule that the picture on the top did not share any of the qualities with the key card, e.g. a single blue star would go on the three yellow squares.|yes aha|5|Quite fun when I realised it had a solution!
+wnolfs|48|chose the opposite card|chose the opposite card color shape and number|yes aha|6|
+||see how good participants are at solving logic problems|the card given matched the only card that it had nothing in common with|yes aha|4|
+||To know if one can find the rule of the sorting.|the letter in the deck  card must correspond to the letter in the key cards, not minding the colour or the shape.|yes aha|5|none
+wnolfs|34|Unsure|Yes - start with first card and work way across regardless of colour/shape/number|yes aha|3|
+||to see how quickly we could work out the connection|The letter on the pack card told you which pile to put it in.|yes aha|3|
+||34|34|yes aha|1|df
+||Test how much participants view the task holistically|The pattern/colour was irrelevant, only the letter was|no aha|2|
+||dfdf|df|yes aha|1|df
+||colors and color blindness|yes   all letters together regardless of color  group by same letters|yes aha|1|
+||To see if people bother to read all the instructions necessary to complete the task|N/A|yes aha|3|Interesting study I enjoyed taking part in.  Thank you
+||dfdf|df|yes aha|1|df
+||dfdf|df|yes aha|1|df
+||no idea|nope|yes aha|10|
+wonly|56|Not sure, how quickly you can figure out how to arrange the cards|Just followed the letter on the cards|no aha|1|
+wlin|50|I'm not certain, but perhaps to do with pattern recognition?|Of course, it's the letter at the bottom of the cards. Took me a minut ethough.|yes aha|3|thank you for allowing me to participate in this study.
+wlout|51|I think it was to see whether people would find the rule to the game|You basically had to pick the card from the deck and u had to replace it with the key that does not share it's colour, shape and number.|yes aha|6|
+wnol|52|To find out the correct way to sort the cards|I think I did, I tried different variations such as according to colour, symbol, value but in the end I discovered that the card belonged in the pile that it shared no common characteristic with i.e had to be of different symbol, colour and value/number of symbols|yes aha|7|None.
+wlin|92|To find the rule to sort the cards|Sort cards based on the letter|yes aha|1|
+wlin|85|To see how long it would take to discover the correct rule.|Match the letters on both sets.|yes aha|3|Could have been longer, fun game!
+wlout|72|to see how quickly you could find the pattern|card goes to pile that shares no common qualities|yes aha|2|
+wonly|70|I'm not sure - I think I got an easy version of the test; I assume some other participants got a more difficult version in which the correct way to sort cards was more ambiguous.|I simply dropped each card onto the matching one at the top.|no aha|1|
+wlin|99|To see if people were swayed with the colours and the shapes.|Matching the correct letters A B C D in the right pile|yes aha|4|
+wlout|79|To see how quickly people can sort cards?|Says at the bottom of the screen which pile to put it on.|yes aha|1|N/A
+wonly|63|no clue|same letter|no aha|1|if you were testing for the &quot;aha&quot; moment, it would have been better to have multiple levels of the previous game with variance, since one test would be obvious from the get-go nullifying the possibility for figuring out the rule.
+wlout|100|cognitive test|yes I did. I figured the clue was in the letters underneath the cards|yes aha|1|I liked the experiment
+wlin|71|To see if we could work out how the cards were matched|Yes I did, the letter on the card was to match the letter of the row of cards|no aha|1|
+wonly|77|I'm not sure|I simply placed each card over the corresponding letter above|yes aha|1|Not sure it worked - all I saw was 4 cards A, B, C, D &amp; each card from the deck had a corresponding letter. Made it very easy.
+wonly|105|To check cards could be matched correctly|The letters corresponded|yes aha|1|
+moonsq|75|See how long I would do the experiment as I kept getting incorrect|No rule until the end|no aha|10|
+wnolfs|69|to match the card from the deck with the key card that had NO correlation.|to sort the deck, place the card from the deck onto the key card that has no similarities. I.e. different colour, different shape AND different number of symbols.|yes aha|1|It was easy when applying a strategy from the very start
+wonly|84|To sort by letters|Same letters|yes aha|1|
+moonsq|103|Unsure, found it quite confusing|Follow the pack left to right|yes aha|6|
+moonsq|68|To assess how you picked the cards|I thought there was but it changed|yes aha|5|
+wnolfs|62|unsure|yes, left to right|yes aha|7|no
+wlout|107|To test perception of peoples eyes to colour and shapes|Look at the letters|yes aha|3|n/a
+moonsq|89|To see how long it takes people to work out correct sequence of card dealing|Yes. Deal from the deck to the first key card, then the 2nd, then the 3rd and then the fourth and repeat till call the deck of cards are used up.|yes aha|3|
+wnol|94|To see whether I would persist despite getting it wrong multiple times.|To find a card that did not correspond with the colour, shape, or number.|yes aha|7|N/A
+wlin|106|If I can differentiate between the colors, the shapes and the letters and ensure the correct card is placed in the correct area|I matched the correct letters and ignored the colors and the shapes|yes aha|5|At first I thought I had to drag the card from the top to the deck and then realized it was the other way round.
+moonsq|82|I really honestly don't know, may be the level of perserveance of the participant!|I think so, though it would be nice to have it clarified.  Eventually it seemed that if I dealt the cards from left to right it seemed to work.|yes aha|4|I feel I must be not an overly confident person as I would just like to know for sure that I managed to find the correct way.  I think it took me a little while also as with other studies they often give you examples and I was assuming that this would be the case however you were straight in wondering what was going wrong!
+wonly|91|To put the cards in the correct pile|Matching the letters together|yes aha|1|
+wnol|59|To get as many correct as possible|Yes, the rule was to find the card that had no relevance both in terms of shape, colour and number of items in each card.|yes aha|7|Enjoyed this thanks. Hope all goes well with your study.
+wlin|64|figuring out the correct way|ABC|yes aha|5|
+wnolfs|104|Im not sure... to see how many tries on average it takes for participants to figure out the correct way to sort?|it seemed that each card belonged on top of another card with nothing in common between them (number, color or shape)|yes aha|3|nice change of pace. thanks, and best wishes
+wlin|113|ability to focus on alphabet|no|no aha|3|no
+moonsq|110|I think the goal  was to see if it's possible to figure out the rules of the game.|The card from a deck had to be sorted firstly to the card on the left and have the colors match some of the pattern from the deck card. Then the same had to be done for the card next to the left one and so on.|yes aha|4|No
+moonsq|117|I've absolutely no idea!|No!|no aha|8|
+wlout|86|Observation skills.|Yes, it was the letter below the deck.|yes aha|7|D'oh.
+wnol|80|I really dont know.  I thought I figured out a pattern but then it didnt work.|I thought I did but then not.|yes aha|10|
+wnolfs|83|To make me mad!!!!|Towards the end I found that just sequencing the cards - adding it to the next one along was correct - up until that I was trying all sorts of combinations|yes aha|9|HORRIBLE!!!!! I was really frustrated and found it VERY irritating...Thanks for that!
+wnol|115|n/a|the cards should be sorted into the group that has no similar characteristics (different shape, colour, configuration).|yes aha|2|n/a
+wnol|73|To find the correct sequence of numbers colours and shapes|No I didnt|yes aha|10|
+wnol|101|working out the pattern|not really|yes aha|7|
+wnolfs|97|To see if I could work out the sequence|no|no aha|8|
+moonsq|96|It one's patience, understanding and moving of cards.|No I did not. It seemed very randomly.|no aha|6|
+wnol|66|to memorise which colour, shape and number went in which sequence|one red triangle, two  green stars, three yellow squares, four blue circles|yes aha|7|took me a while to work out what was going on
+wlout|114|How long it takes someone to figure out the pattern|It cannot be the same colour, shape, or number as the deck it is sorting into.|yes aha|6|The survey initially didn't work, as it froze when I got to the game phase, although after loading up the experiment again it worked. I hope this doesn't affect my data.
+wnol|87|To see if candidates can discern sequences|No I didn't|no aha|10|I still don't know the solution, but I think I would have had to record the correct answers to identify it.....which I didn't do
+wonly|119|To sort the cards into the correct decks|I redid the experiment, in this second attempt instead of coloured shapes I got letters A, B, C, D. The experiment was fairly straight forward to sort the bottom letter card into the correct deck at the top, in this case matching the letters.|yes aha|1|I'm a little confused as I had an issue with the experiment. This is my second attempt. In my first attempt the cards were different coloured shapes, and a number of shapes on each card at the top from 1 triangle, to 2 squares and so on. In this attempt the the page would not reload I had to do this myself and there was no sign of completion. The second attempt became extremely easy in comparison being just letters A,B,C&amp;D which we had to match the bottom card with.
+wnol|108|to think about what category you would put the card in. I tried to group them in colour, number and shapes.|No I didn't find the correct rule.|no aha|10|10, as I didnt find the correct way of sorting the cards. I would like to know what the correct way of sorting the cards was as I am still unsure.
+wnolfs|76|To find out how people figure out patterns|Honestly, after a while I thought I did, and it helped sorting some in a row, but it failed me, so in the end, I just dragged to what felt right and it ended up being right multiple times in a row.|yes aha|4|
+wlin|120|Originally, I thought it was to figure out a pattern. But now I think it was more about the aha moment, as described below. Perhaps how long it takes to realise there could be a different way to try things and reach that aha moment? I'm not entirely sure!|To ignore the colours and shapes and just pay attention to the letters!|yes aha|2|It's challenging to rate its difficulty! Once I cottoned on, it was incredibly easy (a 1!), but perhaps I should've cottoned on sooner.
+wlout|121|TO determine how long it took the participant to figure out the pattern, to consider presumed external elements to the puzzle|It follows the letter below the card|yes aha|5|
+wnolfs|111|To try and determine a pattern .|A pattern seamed to be forming but as soon as you think you have a pattern it fails then you go what is the pattern .|yes aha|7|I would like to no what the rule for selecting the right pattern was to see how far i was from cracking it .  It appeared to be a number sequence rather than a color or shape .
+wnolfs|118|No idea|No idea|no aha|8|
+wnola|60|to se if it worked|no|yes aha|4|
+||I was totally confused|NO|no aha|5|
+wonly|126|To Determine How People Learn From Feedback|Sort the Cards According to Their Letter - The Cards Had Letters in My Experiment|yes aha|1|Technical Issues, When I Loaded The Experiment, and sorted the first card, and its just sitting there saying 'Correct'I had to reload it for ot to move into the next card
+wnola|133|To see how long it took me to catch on the card game's pattern|Yes, you had to place the cards one by one from left to right across the piles and then start back on the far left again and keep going.|yes aha|4|
+wnolfs|146|To determine how quickly people can work out a rule from limited guidance|The card from the deck had to be paired with the only 'key card' which did not share a single property (number/shape/colour)|yes aha|6|
+wnola|140|How long people take to work it out.|just sorted into the piles in order 1, 2, 3, 4.|yes aha|6|
+wnola|136|To work out what you wanted to do with the cards|yes, 1,2,3,4 and repeat|yes aha|3|none
+wnola|143|Pattern learning?|I got most wrong until i realised you have to Sort them in sequence and it had nothing to do with colour or shape.|yes aha|6|
+wnola|139|To see if we could find a rule.|Yes, the cards were just put in order left to right. the symbols were irrelevant.|yes aha|5|I got bored with being wrong all the time and just mechanically tried to finish the test without looking for a solution then I noticed the pattern. When I stopped looking, I saw.
+wnola|134|To figure out how the cards matched up.|Maybe, at the end one card just went onto each pile repeatedly|no aha|8|
+wnola|144|To judge the candidate's ability in figuring out sequences.|Yes. Left to right.|yes aha|5|I feel stupid now! I feel that I should have figured it out sooner.
+wlout|149|to match the cards up that do not match|match the cards to a card that does not have same colour, shape or number as the other card.|yes aha|5|it was interesting, i didn't notice the letters until later in the study beneath the stack of cards at the bottom as i had not pulled the screen up far enough to see them so possibly might have noticed the sorting rule quicker.
+wlin|148|To see whether the number of shapes or the colours on the cards would make me choose the wrong pairings to match.|The rule was to match the cards letters, i.e. cards with 'A' on them should be dragged on to other card with 'A' on it, and so on.|yes aha|4|
+wnola|141|im not sure, i would say to try to identify a pattern to solve a problem.|yes, i found it way late on the game, but it was just a sequence that didnt care about color of shape, just had to put one on each stack clockwise.|yes aha|7|it was fun!
+moonsq|145|no idea|I did not sorry|yes aha|9|
+wnola|135|I have no idea|not really. It felt pretty random.|no aha|5|
+wnola|132|To see if I could pick up on a pattern.|I did not!  It was frustrating.|no aha|9|no
+wnola|151|pattern recongition|i did not|no aha|9|the survey was much longer than stated on prolific. almost double the time.
+moonsq|152|the goal was to sort the moons card in the different cards and see if the individual formed an pattern depending on correct or incorrect selections, if the individual formed an sequence.|an rule to try each card and see if it matched, process of elimination.|no aha|4|
+wnola|131|To determine is I could figure out a pattern to determine which values were correct|No, I thought it might be the colour match or the number of items. But when I experimented with these I did not get a consistent result.|no aha|10|
+||I think it was to do with spatial awareness, whether you could put the right card in the right deck based on the shapes that were on the cards, whether more attention was paid to the shape or the colour|No!!!|no aha|8|

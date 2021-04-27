@@ -1,0 +1,17 @@
+wcstf,178897,1,1,explore,spABCD,qy3C,qb1,false,481,2020
+wcstf,178897,2,2,explore,spABCD,sg2B,qg1,false,800,1955
+wcstf,178897,3,3,explore,spABCD,tr1A,sb4,true,948,1994
+wcstf,178897,4,4,explore,spABCD,sg2B,tr2,true,1087,2402
+wcstf,178897,5,5,explore,spABCD,tr1A,cy1,false,854,2059
+wcstf,178897,6,6,explore,spABCD,qy3C,cg1,false,991,2130
+wcstf,178897,7,7,explore,spABCD,cb4D,sy1,false,743,2034
+wcstf,178897,8,8,explore,spABCD,cb4D,tg2,false,807,1707
+wcstf,178897,9,9,failed,spABCD,qy3C,sg4,false,1015,2005
+wcstf,178897,10,1,explore,s,sg2B,ty3,false,632,1768
+wcstf,178897,11,2,explore,s,tr1A,tg3,true,1174,2036
+wcstf,178897,12,3,failed,s,qy3C,sr1,false,849,1974
+wcstf,178897,13,1,explore,n,cb4D,cy4,true,711,1639
+wcstf,178897,14,2,explore,n,qy3C,qy4,false,647,1549
+wcstf,178897,15,3,failed,n,sg2B,sg3,false,592,1499
+wcstf,178897,16,1,explore,c,tr1A,ty1,false,991,1898
+wcstf,178897,17,2,explore,c,cb4D,sb3,true,593,1598

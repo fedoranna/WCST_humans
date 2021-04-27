@@ -1,0 +1,3 @@
+wcst,405616,1,1,explore,c,qy3C,cg4,false,768,2101
+wcst,405616,2,2,explore,c,qy3C,qb1,false,447,1395
+wcst,405616,3,3,explore,c,qy3C,tg4,false,422,1239

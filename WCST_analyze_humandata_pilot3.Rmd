@@ -1,0 +1,273 @@
+---
+title: "WCST analysis"
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+
+# PACKAGES
+knitr::opts_chunk$set(echo = FALSE)
+library(dplyr)
+library(stringdist)
+library(reshape2)   
+library(ggplot2)
+```
+
+```{r read data, message=FALSE, warning=FALSE}
+
+# Parameters
+rm(list = ls()) # clear workspace
+setwd("C:/Users/fedor/OneDrive/Documents/R/WCST_humans/RESULTS/results_pilot_3/")
+datadir = "C:/Users/fedor/OneDrive/Documents/R/WCST_humans/RESULTS/results_pilot_3/"
+
+# Read data from surveys
+surveydata1 <- read.table(paste(datadir, "vpn.txt", sep=""), header = FALSE, sep = ",")
+surveydata2 <- read.table(paste(datadir, "survey.txt", sep=""), header = FALSE, sep = "|")
+
+# Read data from files in a directory
+resultfiles <- list.files(datadir, pattern = "*Results.txt" )
+alldata <- c()
+success <- c()
+
+for (i in 1:length(resultfiles))
+{
+  print(resultfiles[i])
+  d <- read.table(paste(datadir, resultfiles[i], sep=""), header = FALSE, sep = ",") 
+  s <- sum(d[(nrow(d)-17):nrow(d), 6]=="true") == 18 # did he solve the task?
+  
+  alldata <- rbind(alldata, d)
+  success <- rbind(success, c(d[1,2], s))
+}
+
+#alldata$match <- ifelse(alldata$match=="true",TRUE,FALSE)
+for(i in 1:nrow(alldata)){
+  alldata$match[i] <- ifelse(alldata$match[i]=="true",TRUE,FALSE)
+}
+
+# Change column names
+colnames(alldata) <- c("condition", "ID", "trial", "src_card", "tar_card", "match", "mv_time", "total_time", "timestamp")
+colnames(surveydata1) <- c("ID", "age", "sex", "vision", "colorblindness")
+#survey
+
+```
+
+# Check data
+
+
+```{r check data 2}
+
+participants <- alldata %>%
+  group_by(ID) %>%
+  summarize(
+    Condition = unique(condition), 
+    Nbof_moves = max(trial),
+    Mean_move_time = mean(mv_time), #ms
+    Mean_total_time = mean(total_time), #ms
+    Mean_thinking_time = Mean_total_time - Mean_move_time, # ms
+    Task_time = sum(total_time)/1000, #sec
+    Solver = NA
+  )
+for (i in 1:length(participants$ID)){
+  participants$Solver[i] <- success[which(success[,1]==participants$ID[i]), 2]
+}
+
+groups <- participants %>%
+  group_by(Condition) %>%
+  summarize(
+    Nbof_participants = n_distinct(ID),
+    Nbof_solvers = sum(Solver),
+    Solution_rate = Nbof_solvers/Nbof_participants,
+    Avg_task_time = mean(Task_time),
+    Avg_nbof_moves = mean(Nbof_moves)
+  )
+
+```
+
+There should be 6 conditions. The number of participants in each condition is:  
+`r summary(alldata$condition)`
+
+There should be 24+1=25 types of source cards if we use unambiguous cards. The number of source card types:
+
+```{r}
+length(summary(alldata$src_card))
+```
+
+All source cards should have a 4-digit code. The source card codes and frequencies were:
+```{r check data 3}
+summary(alldata$src_card) 
+```
+
+There should be 4 types of target cards, with the codes:  tr11 (one red triangle A), sg22 (two green stars B), ry33 (three yellow rectangles), cb44 (four blue circles D). Target card codes and frequencies were:
+```{r check data 4}
+summary(alldata$tar_card)
+```
+
+# Variables
+## Additional variables per move
+
+From the raw data, I calculated some additional variables, such as:
+
+* Think time: total time between two drop action minus the time spent with drag-and-drop
+* Matching shape/color/number: the rule that the move conforms to. 
+
+```{r variables per move, warning = FALSE}
+
+# Create think_time variable
+alldata <- mutate(alldata, think_time = total_time - mv_time)
+
+# Create matching_rule variable
+alldata <- mutate(alldata, 
+                  matching_shape=NA,
+                  matching_color=NA,
+                  matching_number=NA)
+
+for (r in 1:nrow(alldata)){
+  alldata[r,"matching_shape"] = substr(alldata[r,4],1,1)==substr(alldata[r,5],1,1)
+  alldata[r,"matching_color"] = substr(alldata[r,4],2,2)==substr(alldata[r,5],2,2)
+  alldata[r,"matching_number"] = substr(alldata[r,4],3,3)==substr(alldata[r,5],3,3)
+}
+
+
+```
+
+## Variables per condition
+
+I coded the following variables, separately for each rule:
+
+* Number of participants
+* Number of solvers
+* Number of nonsolvers
+* Percentage of solvers
+* Average number of moves
+* Average time spent with the task
+
+# Checking participants one-by-one
+
+```{r}
+
+for (i in participants$ID){
+  summarydata <- filter(participants,ID==i)
+  movedata <- filter(alldata, ID==i)
+  plot(movedata$timestamp, movedata$match)
+  title(c(summarydata$ID, summarydata$Condition[], summarydata$Task_time/60, summarydata$Solver))
+}
+
+sort(surveydata1$ID)
+participants
+
+length(surveydata1$ID)
+nrow(participants)
+
+
+```
+
+
+
+# Hypotheses
+
+
+
+# Analyses
+
+##Exclusion of participants
+*What exclusion criteria do we want to use?*
+
+* Exclude participants who did not finish the experiment?
+* Exclude participants who did not find out the standard rules?
+* Exclude participants who stay inactive for more than a certain amount of time?
+* Exclude participants who respond too quickly?
+Who did not do the questionnaire
+Who were inactive for more than 1 minute
+For spatial rule: who did not solve the other rules
+if std and sp rule is last: if they only make one mistake
+if std and sp rule is first: if they only make three mistake
+if moon: if they make 0 mistake
+
+## Statistical tests
+
+For deciding whether solving the task in one condition is more difficult than solving it in another, we can use two variables: solution rates and solution times. As for the solution rates, we can construct a four-by-two contingency table (number of solvers and non-solvers in the four conditions). Analyzing a larger than two-by-two contingency table is possible with a Chi-square test, but it is only useful if the categories defining the rows are arranged in a natural order with equal spacing between rows. This is not true in our case, so we will have to analyze two-by-two contingency tables instead, separately for Hypothesis 1 and Hypothesis 2. We chose Fisher's exact test, which is supposed to be more exact than the Chi-square test, especially if the cells in the contingency table contain small values.
+OR BONFERRONI CORRECTION
+
+BINARY LOGISTIC REGRESSION, persev could be a predictor
+less persev -> more likely to find sp rule
+
+Solution rates in the four conditions:
+```{r soution rates df}
+SR1234 <- filter(cond_data, category==spatial_sequence) %>% select(solvers_nb:nonsolvers_nb)
+SR1234
+```
+
+Solution time is calculated for each participant as the time spent with trying to solve the sequence rule (in minutes). We analyzed the solution time with a two-way ANOVA. Median solution times for the four conditions are shown by the box plots in the following figure:
+
+```{r solution times df}
+ST1234 <- filter(part_data, category==spatial_sequence) %>% select(time_spent)
+ST <- ST1234[,c(1,3)]
+ST <- melt(ST, id.var = "condition")
+ST[,3] <- ST[,3]/60
+ggplot(data = ST, aes(x=variable, y=value)) + geom_boxplot(aes(fill=condition))
+```
+
+### Number of solvers
+#### Does the order of rules influence the difficulty of finding the sequence rule?
+We analyzed the contingency table containing the number of solvers and non-solvers in condition WCST and WCSTF and then separately, for condition WCSTC and WCSTFC. A p<0.05 means that the row/column association is statistically significant. 
+```{r Fisher tests}
+fisher.test(SR1234[c(1,3), c(2,3)])
+fisher.test(SR1234[c(2,4), c(2,3)])
+```
+
+#### Does the order of rules influence the difficulty of finding the sequence rule?
+We analyzed the contingency table containing the number of solvers and non-solvers in condition WCST and WCSTC and then separately, for condition WCSTF and WCSTFC. A p<0.05 means that the row/column association is statistically significant. 
+```{r Fisher test}
+fisher.test(SR1234[c(1,2), c(2,3)])
+fisher.test(SR1234[c(3,4), c(2,3)])
+```
+
+### Solution time
+We checked whether the data was normally distributed with Kolmogorov-Smirnoff test:
+```{r ANOVA or Wilcoxon}
+
+# Variables
+ST1 <- filter(ST1234, condition=="wcst") %>% select(time_spent)
+ST2 <- filter(ST1234, condition=="wcstf") %>% select(time_spent)
+ST3 <- filter(ST1234, condition=="wcstc") %>% select(time_spent)
+ST4 <- filter(ST1234, condition=="wcstfc") %>% select(time_spent)
+
+ST1 <- as.matrix(ST1[,2])
+ST2 <- as.matrix(ST2[,2])
+ST3 <- as.matrix(ST3[,2])
+ST4 <- as.matrix(ST4[,2])
+
+# Statistics
+normality1 <- ks.test(ST1, pnorm, alternative="two.sided", exact=NULL)
+normality2 <- ks.test(ST2, pnorm, alternative="two.sided", exact=NULL)
+normality3 <- ks.test(ST3, pnorm, alternative="two.sided", exact=NULL)
+normality4 <- ks.test(ST4, pnorm, alternative="two.sided", exact=NULL)
+
+normality1
+normality2
+normality3
+normality4
+
+```
+
+If the data is normally distributed, we use ANOVA, if it is not, we use Wilcoxon.
+```{r}
+
+if (normality1$p.value > 0.05 && normality2$p.value > 0.05) {
+  stati <- t.test(ST1, ST2, alternative="two.sided", paired=FALSE, var.equal=FALSE,conf.level=0.95)
+} else {
+  stati <- wilcox.test(ST1, ST2, alternative="two.sided", paired=FALSE, exact=NULL, correct=TRUE, conf.int=TRUE, conf.level=0.95) # two sample Wilcoxon test is the same as the Mann-Whitney test
+}
+stati
+```
+
+
+
+
+
+

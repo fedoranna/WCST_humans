@@ -1,0 +1,130 @@
+wlin,1,Informed consent,17:43:27
+wlin,1,Datasheet,17:43:40
+wlin,1,Instruction,17:43:40
+wlin,1,WCST-Start,17:43:42
+wlin,1,Survey,17:44:55
+wlout,2,Informed consent,22:22:03
+wnol,3,Informed consent,22:22:46
+wnol,3,Datasheet,22:23:16
+wnol,3,Instruction,22:23:17
+wnola,4,Informed consent,22:23:23
+moonsq,5,Informed consent,22:23:33
+wnol,3,WCST-Start,22:23:37
+wnola,4,Datasheet,22:23:47
+wnola,4,Instruction,22:23:47
+wnolfs,6,Informed consent,22:23:49
+moonsq,5,Datasheet,22:23:53
+moonsq,5,Instruction,22:23:54
+wnola,4,WCST,22:24:02
+wlout,2,Datasheet,22:24:17
+wlout,2,Instruction,22:24:18
+moonsq,5,WCST-Start,22:24:23
+wnolfs,6,Datasheet,22:24:37
+wnolfs,6,Instruction,22:24:37
+wnolfs,6,WCST-Start,22:24:46
+wlin,7,Informed consent,22:25:29
+wlout,8,Informed consent,22:25:29
+wnol,9,Informed consent,22:25:30
+wnola,10,Informed consent,22:25:36
+moonsq,11,Informed consent,22:25:40
+wlout,2,WCST-Start,22:25:43
+wlout,8,Datasheet,22:25:53
+wlout,8,Instruction,22:25:53
+wlin,7,Datasheet,22:25:58
+wlin,7,Instruction,22:25:58
+wnolfs,12,Informed consent,22:26:07
+wlin,13,Informed consent,22:26:08
+wlout,8,WCST-Start,22:26:08
+wlout,14,Informed consent,22:26:13
+moonsq,11,Datasheet,22:26:15
+moonsq,11,Instruction,22:26:16
+wnola,10,Datasheet,22:26:24
+wnola,10,Instruction,22:26:25
+wlin,13,Datasheet,22:26:31
+wlin,13,Instruction,22:26:31
+wnol,15,Informed consent,22:26:42
+wlin,7,WCST-Start,22:26:47
+moonsq,11,WCST-Start,22:26:48
+wlout,14,Datasheet,22:26:48
+wlout,14,Instruction,22:26:49
+wnola,10,WCST,22:26:50
+wlin,13,WCST-Start,22:26:51
+moonsq,5,Survey,22:27:07
+wlout,14,WCST-Start,22:27:10
+wnola,10,Instruction,22:27:27
+wnola,10,WCST,22:27:30
+wnol,15,Datasheet,22:27:31
+wnol,15,Instruction,22:27:32
+wnola,10,WCST,22:27:51
+wnola,10,WCST,22:28:04
+wnola,10,WCST,22:28:07
+wnol,3,Survey,22:28:21
+wlout,8,Survey,22:28:32
+wlin,7,Survey,22:28:47
+wlout,14,Survey,22:29:14
+moonsq,11,Survey,22:29:28
+wnola,16,Informed consent,22:30:15
+wlout,2,Survey,22:31:07
+wnola,16,Survey,22:31:52
+wnol,15,WCST-Start,22:37:35
+moonsq,17,Informed consent,23:15:11
+wnolfs,18,Informed consent,23:15:20
+wlin,19,Informed consent,23:15:21
+moonsq,17,Datasheet,23:15:32
+moonsq,17,Instruction,23:15:32
+moonsq,17,WCST-Start,23:15:44
+wlin,19,Datasheet,23:15:48
+wlin,19,Instruction,23:15:48
+wlin,19,WCST-Start,23:16:04
+wnolfs,18,Datasheet,23:16:13
+wnolfs,18,Instruction,23:16:13
+wlout,20,Informed consent,23:16:30
+wnolfs,18,WCST-Start,23:16:40
+wlout,20,Datasheet,23:16:46
+wlout,20,Instruction,23:16:46
+wlout,20,WCST-Start,23:16:48
+wnolfs,18,Instruction,23:17:01
+wnolfs,18,WCST-Start,23:17:11
+wnol,21,Informed consent,23:17:11
+wnol,21,Datasheet,23:17:27
+wnol,21,Instruction,23:17:27
+wnol,21,WCST-Start,23:17:55
+wlout,20,Survey,23:19:00
+wnola,22,Informed consent,23:27:20
+wnola,22,Datasheet,23:27:46
+wnola,22,Instruction,23:27:46
+wnola,22,WCST,23:27:52
+wnol,21,Survey,23:29:55
+moonsq,23,Informed consent,23:30:06
+wnola,22,WCST,23:30:27
+wnola,22,WCST,23:30:32
+wnola,22,WCST,23:30:35
+wnola,22,WCST,23:30:42
+wnolfs,24,Informed consent,23:30:43
+wnola,22,WCST,23:30:44
+wnola,22,WCST,23:30:47
+wnola,22,WCST,23:30:54
+wnola,22,WCST,23:30:59
+wnola,22,WCST,23:31:05
+wnola,22,WCST,23:31:08
+wnola,22,WCST,23:31:13
+wnola,22,WCST,23:31:16
+wnola,22,WCST,23:31:19
+wnola,22,WCST,23:31:21
+wnola,22,WCST,23:31:45
+wnola,22,WCST,23:31:51
+wnolfs,24,Datasheet,23:31:54
+wnolfs,24,Instruction,23:31:54
+wlin,25,Informed consent,23:31:57
+wlin,25,Datasheet,23:32:06
+wlin,25,Instruction,23:32:06
+wlin,25,WCST-Start,23:32:33
+wnolfs,18,Survey,23:32:51
+wlin,25,Survey,23:33:12
+wnolfs,24,WCST-Start,23:35:03
+,,Datasheet,23:35:12
+,,Instruction,23:35:12
+,,WCST-Start,23:35:16
+,,Survey,23:37:34
+wnolfs,24,Survey,23:42:06
+,,Survey,01:33:43
