@@ -5600,3 +5600,8 @@ wnola,915,Instruction,Friday 5th 09:23:36
 wnola,915,WCST,Friday 5th 09:24:03
 moonsq,913,Survey,Friday 5th 09:28:18
 wnola,915,Survey,Friday 5th 09:40:04
+wnola,916,Informed consent,Friday 19th 10:50:18
+wnola,916,Datasheet,Friday 19th 10:50:38
+wnola,916,Instruction,Friday 19th 10:50:38
+wnola,916,WCST,Friday 19th 10:51:03
+wnola,916,Survey,Friday 19th 10:56:16

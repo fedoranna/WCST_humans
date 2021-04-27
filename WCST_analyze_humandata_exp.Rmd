@@ -1,9 +1,9 @@
 ---
 title: "WCST analysis"
 output:
-  word_document: default
-  html_document: default
   pdf_document: default
+  html_document: default
+  word_document: default
 editor_options: 
   chunk_output_type: console
 ---
@@ -20,13 +20,11 @@ library(openxlsx)
 
 knitr::opts_chunk$set(echo = FALSE)
 
-# Put all participant files in wd, and replace 4 files: survey.txt, vpn.txt, time.txt, prolific_export_5f917030b1ac5a05a2123cac.csv
-
-# vpn.txt:
-# 306: delete URL from ID
-# 509: rewrite 4o to 40
-# 894: random text copied into ID field
-# survey: 886 wrote "d" for the level of difficulty field - delete it!
+# Put all participant files in wd, and replace 4 files: 
+# - survey.txt, 
+# - vpn.txt, 
+# - time.txt, 
+# - prolific_export_5f917030b1ac5a05a2123cac.csv
 
 ```
 
@@ -34,7 +32,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Data sources
 
-```{Parameters}
+```{r Parameters}
 
 rm(list = ls()) # clear workspace
 datadir = "C:/Users/fedor/OneDrive/Documents/R/WCST_humans/RESULTS/Round1/" # the directory where you put all the files from the server

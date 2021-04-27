@@ -609,3 +609,4 @@ wnol|900|How long it takes for a person to figure out how the cards are sorted?|
 wnola|912|To see how quickly people can pick up a pattern and solve a problem|Yes - to deal from left to right continuously|yes aha|7|none
 moonsq|913|To have us figure out a pattern when their wasn't any obvious information to go off of.|The cards went in order from left to right.|yes aha|2|No
 wnola|915|To work out how to sort the cards|No I didn't, annoyingly. I'd like to know the answer.|no aha|10|
+wnola|916|To see how long it would take to figure out how to sort the cards|Yes, just taking turns to each pile from left to right|yes aha|7|I wish I'd figured it out sooner
