@@ -436,14 +436,23 @@ After this manual excludion process,should we exclude the extra participants if 
 
 ```{r Manually exclude based on survey}
 
-openxlsx::write.xlsx(participantdata_inc, file=paste(datadir, "included_participants.xlsx", sep=""), 
+openxlsx::write.xlsx(participantdata_inc, file=paste(datadir, "_included_participants.xlsx", sep=""), 
            sheetName = "Sheet1", col.names = TRUE, append = FALSE)
 
 exclude_list <- c("x", "xx") # Prolific ID of excluded participants based on their survey answers
 
 participantdata_inc2 <- filter(participantdata_inc, prolific_ID != exclude_list) # who will be included in data analysis
 
+free_text_answers <- participantdata_inc %>%
+  arrange(condition) %>%
+  select(index, condition, solver, aha, difficulty, goal, rule, comments)
 
+write.csv(free_text_answers, paste(datadir, "_free.text.answers.csv", sep=""), 
+            quote=FALSE,
+            row.names = TRUE)
+
+openxlsx::write.xlsx(free_text_answers, file=paste(datadir, "_free_text_answers.xlsx", sep=""), 
+           sheetName = "Sheet1", col.names = TRUE, append = FALSE)
 
 ```
 
@@ -507,6 +516,7 @@ if (1==0){
 
 # Color points by rule!
 # What if no rule is TRUE? What is more than 1 rule is TRUE?
+
 
 ```
 
