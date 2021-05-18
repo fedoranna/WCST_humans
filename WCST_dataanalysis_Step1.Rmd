@@ -203,6 +203,8 @@ participantdata$condition <- factor(participantdata$condition , levels=c("wlin",
 
 # Calculate variables
 
+## Variables per move
+
 For each move participants made during the game we had the following variables:
 
 * Trial number
@@ -239,10 +241,17 @@ for (r in 1:nrow(movedata)){
 
 ```
 
+## Variables per participant
+
 We also calculated some descriptive variables for each participant based on their move data:
 
 * Number of moves
-* Rask
+* Task time (min): time spent with the task (only the card sorting game)
+* Mean total time (ms): mean trial time 
+* Mean move time (ms): mean drag and drop time
+* Mean think time (ms): mean thinkning time
+
+We merged these variables with the main data frame (participantdata).
 
 ```{r Calculate variables per participant, warning = FALSE}
 
@@ -267,16 +276,8 @@ participantdata$mean_think_time <- sum_movedata$Mean_think_time[r6]
 
 ```
 
-For each participant we calculated the following variables:
+# Exclusion criteria!!!!!
 
-* Number of moves
-* Task time: Time the participant spent with the task (min)
-* Experiment time: The the participant spent with the entire experiment, including the surveys (min)
-* Mean total time: mean time between moves (ms)
-* Mean move time: mean time between drags and drops (ms)
-* Mean think time: mean time the participant spent thinking between moves (total time - move time; ms)
-
-## Exclusion criteria
 ```{r Exclude participants, message=FALSE, warning=FALSE}
 
 # Exclude invalid cases
@@ -288,7 +289,7 @@ participantdata_f5 <- filter(participantdata_f4, (country_of_birth == "CONSENT R
 participantdata_f6 <- filter(participantdata_f5, duplicated(manual_ID)==FALSE)  # who played the game 2x (delete all attempts after the 1st)
 participantdata_inc <- filter(participantdata_f6, is.na(aha)==FALSE) # who will be included in data analysis
 
-# who did not get to survey (quit game early or did not press continue button after timeout) - count these as GAVE UP!!!
+# Who did not get to survey (quit game early or did not press continue button after timeout) - count these as GAVE UP!!!
 gave_up <- filter(participantdata_f6, is.na(aha))
 # this criteria is not sufficient: these could be those for whom the server froze during the survey!!!
 
@@ -389,6 +390,16 @@ All-in-all, we excluded `r sessions - nrow(participantdata_inc)` initialized exp
 We need 78*7 = 546 participants. 
 546 - `r nrow(participantdata_inc)` = `r 546 - nrow(participantdata_inc)` participants needed.
 
+# Stopping criteria
+
+## Stopping rule
+We run the experiment until we had enough (78) participants in each condition after automatically evaluating them based on the exclusion criteria described above. First, the conditions were assigned randomly, then as we got closer to the desired number of participnats, we only let a certain number of participants to enter each condition to make up for the missing number of participants. This process was not exact, so we ended up with a few extra participants in some conditions. We stopped the experiment when each condition had at least 78 participants after the exclusions.    
+We read the survey answers of the remaining participants and decided to exclude a few more:
+
+* ...
+
+After this manual excludion process,should we exclude the extra participants if there are more than 78 in a group?
+
 ## To do on Prolific
 
 Approve the participation and pay the following participants (to be copied to Prolific -> Approve by upload):
@@ -429,49 +440,12 @@ The pilot experiments cost 73.23 GBP all together:
 * Pilot 4:  8.82 GBP
 
 
-# Analyses
-
-## Stopping criteria and further data cleaning:
-
-We run the experiment until we had enough (78) participants in each condition after automatically evaluating them based on the exclusion criteria described above. First, the conditions were assigned randomly, then as we got closer to the desired number of participnats, we only let a certain number of participants to enter each condition to make up for the missing number of participants. This process was not exact, so we ended up with a few extra participants in some conditions. We stopped the experiment when each condition had at least 78 participants after the exclusions.    
-We read the survey answers of the remaining participants and decided to exclude a few more:
-
-* ...
-
-After this manual excludion process,should we exclude the extra participants if there are more than 78 in a group?
-
-```{r Manually exclude based on survey}
-
-# 119 DID IT TWICE
-
-openxlsx::write.xlsx(participantdata_inc, file=paste(datadir, "_included_participants.xlsx", sep=""), 
-           sheetName = "Sheet1", col.names = TRUE, append = FALSE)
-
-exclude_list <- c("x", "xx") # Prolific ID of excluded participants based on their survey answers
-
-participantdata_inc2 <- filter(participantdata_inc, prolific_ID != exclude_list) # who will be included in data analysis
-
-free_text_answers <- participantdata_inc %>%
-  arrange(condition) %>%
-  select(index, condition, solver, aha, difficulty, goal, rule, comments)
-
-write.csv(free_text_answers, paste(datadir, "_free.text.answers.csv", sep=""), 
-            quote=FALSE,
-            row.names = TRUE)
-
-openxlsx::write.xlsx(free_text_answers, file=paste(datadir, "_free_text_answers.xlsx", sep=""), 
-           sheetName = "Sheet1", col.names = TRUE, append = FALSE)
-
-# Modify
-# check if difficulty is outside of range, e.g. 50 or 7.5
-
-```
 
 ## Summary of conditions
 
 ```{r Summarize conditions}
 
-partic_groups <- participantdata_inc2 %>%
+partic_groups <- participantdata_inc %>%
   group_by(condition) %>%
   summarize(
     Nbof_participants = n_distinct(index),
@@ -511,12 +485,33 @@ We need 78 participants per condition.
 **We need `r sum(missing[which(missing>0)])` more participants**  
 **That is `r sum(missing[which(missing>0)]) * 1.396` GBP**
 
+
+# Save data
+
+## Data files
+
+```{r Saving and printing}
+
+openxlsx::write.xlsx(participantdata_inc, file=paste(datadir, "_included_participants.xlsx", sep=""), 
+           sheetName = "Sheet1", col.names = TRUE, append = FALSE)
+
+free_text_answers <- participantdata_inc %>%
+  arrange(condition) %>%
+  select(index, condition, solver, aha, difficulty, goal, rule, comments)
+
+openxlsx::write.xlsx(free_text_answers, file=paste(datadir, "_free_text_answers.xlsx", sep=""), 
+           sheetName = "Sheet1", col.names = TRUE, append = FALSE)
+
+
+```
+
+
 ## Participant plots
 
 ```{r Plot}
 
 if (1==0){
-  participantdata_inc2 <- arrange(participantdata_inc2, condition)
+  participantdata_inc2 <- arrange(participantdata_inc, condition)
   for (i in participantdata_inc2$index){
     P <- filter(participantdata,index==i)
     M <- filter(movedata, index==i)
@@ -530,101 +525,6 @@ if (1==0){
 
 
 ```
-
-## Difficulty of the task
-
-### Solution rate: Fisher's exact tests
-
-We analyzed the contingency table containing the number of solvers and non-solvers in pairs of conditions. A p<0.05 means that the row/column association is statistically significant. 
-
-```{r Fisher tests}
-
-barplot(partic_groups$Solution_rate, names.arg = partic_groups$condition, main="Solution rates")
-
-# fisher.test(partic_groups2[c("wlin","wlout"), c("Nbof_solvers","Nbof_nonsolvers")])
-# fisher.test(partic_groups2[c("wlout","wnol"), c("Nbof_solvers","Nbof_nonsolvers")])
-# fisher.test(partic_groups2[c("wnolfs","wnola"), c("Nbof_solvers","Nbof_nonsolvers")])
-# fisher.test(partic_groups2[c("moonsq","wnola"), c("Nbof_solvers","Nbof_nonsolvers")])
-
-
-
-
-```
-
-### Failure rate
-
-```{r Fisher tests 2}
-
-barplot(partic_groups$Failure_rate, names.arg = partic_groups$condition, main="Failure rates")
-
-```
-
-### Solution time: ANOVA
-
-We checked whether the data was normally distributed with Kolmogorov-Smirnoff test:
-
-```{r Normality}
-
-#hist(participantdata_inc2$task_time)
-
-# wlin_time <- participantdata_inc2 %>% filter(condition=="wlin") %>% select(task_time)
-# wlin_time <- matrix(wlin_time[,1])
-# 
-# wlout_time <- participantdata_inc2 %>% filter(condition=="wlout") %>% select(task_time)
-# wlout_time <- matrix(wlout_time[,1])
-# 
-# 
-# 
-# normality_wlin <- ks.test(
-#   participantdata_inc2 %>% filter(condition=="wlin") %>% select(task_time), 
-#   pnorm, alternative="two.sided", exact=NULL)
-# normality_wlout <- ks.test(
-#   participantdata_inc2 %>% filter(condition=="wlout") %>% select(task_time), 
-#   pnorm, alternative="two.sided", exact=NULL)
-# 
-# normality_wlin
-# normality_wlout
-
-```
-If the data is normally distributed, we use ANOVA, if it is not, we use Wilcoxon.
-
-```{r ANOVA or Wilcoxon}
-
-# greenhouse-geisser correction: robust also for non-normally distributed data
-
-#participantdata_inc2$condition <- factor(participantdata_inc2$condition , levels=c("wlin", "wlout", "wnol", "wnolfs", "wnola", "moonsq", "wonly"))
-
-
-boxplot(task_time ~ condition, 
-        participantdata_inc2,
-        ylab="Task time")
-
-# if (normality_wlin$p.value > 0.05 && normality_wlout$p.value > 0.05) {
-#   stati <- t.test(wlin_time, wlout_time,
-#                   alternative="two.sided", paired=FALSE, var.equal=FALSE, conf.level=0.95)
-#   } else {
-#     stati <- wilcox.test(wlin_time, wlout_time,
-#                          alternative="two.sided", paired=FALSE, exact=NULL, correct=TRUE, conf.int=TRUE, conf.level=0.95) # two sample Wilcoxon test is the same as the Mann-Whitney test
-#   }
-# 
-# 
-# stati
-
-``` 
-
-### Binary logistic regression
-
-
-
-## Aha feelings: Fisher's exact test
-
-```{r Aha-ratings}
-
-barplot(partic_groups$Aha_rate_solvers, names.arg = partic_groups$condition, main="Aha rate of solvers")
-
-
-```
-
 
 
 

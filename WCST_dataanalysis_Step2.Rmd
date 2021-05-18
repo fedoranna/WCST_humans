@@ -1,0 +1,154 @@
+---
+title: "WCST data analysis - Step 2"
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r Setup and parameters, include=FALSE}
+
+# PACKAGES
+library(knitr)
+library(dplyr)
+library(stringdist)
+library(reshape2)   
+library(ggplot2)
+library(openxlsx)
+
+knitr::opts_chunk$set(echo = FALSE)
+
+
+
+```
+
+# Read data frames and manually rated data
+
+# Exclude participants based on their free text answers
+
+```{r Manually exclude based on survey}
+
+# 119 DID IT TWICE
+
+
+
+exclude_list <- c("x", "xx") # Prolific ID of excluded participants based on their survey answers
+
+participantdata_inc2 <- filter(participantdata_inc, prolific_ID != exclude_list) # who will be included in data analysis
+
+
+
+
+
+
+```
+
+
+# Modify data
+
+Check if difficulty is outside of range, e.g. 50 or 7.5
+
+# Statistical data analysis
+
+## Difficulty of the task
+
+### Solution rate: Fisher's exact tests
+
+We analyzed the contingency table containing the number of solvers and non-solvers in pairs of conditions. A p<0.05 means that the row/column association is statistically significant. 
+
+```{r Fisher tests}
+
+barplot(partic_groups$Solution_rate, names.arg = partic_groups$condition, main="Solution rates")
+
+# fisher.test(partic_groups2[c("wlin","wlout"), c("Nbof_solvers","Nbof_nonsolvers")])
+# fisher.test(partic_groups2[c("wlout","wnol"), c("Nbof_solvers","Nbof_nonsolvers")])
+# fisher.test(partic_groups2[c("wnolfs","wnola"), c("Nbof_solvers","Nbof_nonsolvers")])
+# fisher.test(partic_groups2[c("moonsq","wnola"), c("Nbof_solvers","Nbof_nonsolvers")])
+
+
+
+
+```
+
+### Failure rate
+
+```{r Fisher tests 2}
+
+barplot(partic_groups$Failure_rate, names.arg = partic_groups$condition, main="Failure rates")
+
+```
+
+### Solution time: ANOVA
+
+We checked whether the data was normally distributed with Kolmogorov-Smirnoff test:
+
+```{r Normality}
+
+#hist(participantdata_inc2$task_time)
+
+# wlin_time <- participantdata_inc2 %>% filter(condition=="wlin") %>% select(task_time)
+# wlin_time <- matrix(wlin_time[,1])
+# 
+# wlout_time <- participantdata_inc2 %>% filter(condition=="wlout") %>% select(task_time)
+# wlout_time <- matrix(wlout_time[,1])
+# 
+# 
+# 
+# normality_wlin <- ks.test(
+#   participantdata_inc2 %>% filter(condition=="wlin") %>% select(task_time), 
+#   pnorm, alternative="two.sided", exact=NULL)
+# normality_wlout <- ks.test(
+#   participantdata_inc2 %>% filter(condition=="wlout") %>% select(task_time), 
+#   pnorm, alternative="two.sided", exact=NULL)
+# 
+# normality_wlin
+# normality_wlout
+
+```
+If the data is normally distributed, we use ANOVA, if it is not, we use Wilcoxon.
+
+```{r ANOVA or Wilcoxon}
+
+# greenhouse-geisser correction: robust also for non-normally distributed data
+
+#participantdata_inc2$condition <- factor(participantdata_inc2$condition , levels=c("wlin", "wlout", "wnol", "wnolfs", "wnola", "moonsq", "wonly"))
+
+
+boxplot(task_time ~ condition, 
+        participantdata_inc2,
+        ylab="Task time")
+
+# if (normality_wlin$p.value > 0.05 && normality_wlout$p.value > 0.05) {
+#   stati <- t.test(wlin_time, wlout_time,
+#                   alternative="two.sided", paired=FALSE, var.equal=FALSE, conf.level=0.95)
+#   } else {
+#     stati <- wilcox.test(wlin_time, wlout_time,
+#                          alternative="two.sided", paired=FALSE, exact=NULL, correct=TRUE, conf.int=TRUE, conf.level=0.95) # two sample Wilcoxon test is the same as the Mann-Whitney test
+#   }
+# 
+# 
+# stati
+
+``` 
+
+### Binary logistic regression
+
+
+
+## Aha feelings: Fisher's exact test
+
+```{r Aha-ratings}
+
+barplot(partic_groups$Aha_rate_solvers, names.arg = partic_groups$condition, main="Aha rate of solvers")
+
+
+```
+
+
+
+
+
+
+
