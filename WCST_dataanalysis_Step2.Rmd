@@ -43,6 +43,7 @@ rates <- read.xlsx(paste(datadir, rated_data, sep=""))
 
 r6 = match(participantdata_inc$index, rates$index)
 participantdata_inc$rule_code <- rates$agreed.rule[r6]
+participantdata_inc$numbers4letters <- rates$Letter.rule.expained.with.numbers
 # participantdata_inc$exclude <- rates$Exclude
 
 ```

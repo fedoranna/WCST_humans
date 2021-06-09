@@ -197,7 +197,7 @@ participantdata$aha[replace_these] <- ifelse(surveydata2[r5[replace_these],5]=="
 participantdata$difficulty[replace_these] <- as.numeric(surveydata2[r5[replace_these],6])
 participantdata$comments[replace_these] <- as.character(surveydata2[r5[replace_these],7])
 
-# Reorder conditions
+# Reorder conditions as factor (does not reorder rows in the data frame)
 participantdata$condition <- factor(participantdata$condition , levels=conditions_ordered)
 
 ```
