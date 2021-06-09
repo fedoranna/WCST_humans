@@ -1,9 +1,9 @@
 ---
 title: "WCST data analysis - Step 1"
 output:
-  pdf_document: default
-  html_document: default
   word_document: default
+  html_document: default
+  pdf_document: default
 editor_options: 
   chunk_output_type: console
 ---
@@ -35,6 +35,7 @@ We used this script for the following purposes:
 * to calculate variables from the data
 * to output data into excel spreadsheets for manual rating of the free text answers
 * to exclude participants
+* to save data frames
 
 # Read data sources
 
@@ -197,7 +198,7 @@ participantdata$difficulty[replace_these] <- as.numeric(surveydata2[r5[replace_t
 participantdata$comments[replace_these] <- as.character(surveydata2[r5[replace_these],7])
 
 # Reorder conditions
-participantdata$condition <- factor(participantdata$condition , levels=c("wlin", "wlout", "wnol", "wnolfs", "wnola", "moonsq", "wonly"))
+participantdata$condition <- factor(participantdata$condition , levels=conditions_ordered)
 
 ```
 
@@ -205,7 +206,7 @@ participantdata$condition <- factor(participantdata$condition , levels=c("wlin",
 
 ## Variables per move
 
-For each move participants made during the game we had the following variables:
+For each move participants made during the game we had the following variables from the server:
 
 * Trial number
 * Source card
@@ -218,9 +219,9 @@ For each move participants made during the game we had the following variables:
 Apart from these, we calculated a few more variables for each move:  
 
 * Think time: total time - move time
-* Matching shape: whether the move confromed to the shape rule
-* Matching color: whether the move confromed to the color rule
-* Matching number: whether the move confromed to the number rule
+* Matching shape: whether the move conformed to the shape rule
+* Matching color: whether the move conformed to the color rule
+* Matching number: whether the move conformed to the number rule
 
 ```{r Calculate variables per move, warning = FALSE}
 
@@ -276,24 +277,22 @@ participantdata$mean_think_time <- sum_movedata$Mean_think_time[r6]
 
 ```
 
-# Exclusion criteria!!!!!
+# Exclusion criteria
 
 ```{r Exclude participants, message=FALSE, warning=FALSE}
 
 # Exclude invalid cases
-participantdata_f1 <- filter(participantdata, is.na(manual_ID)==FALSE)      # who did not fill out datasheet
-participantdata_f2 <- filter(participantdata_f1, colorblindness==FALSE)     # who checked color-blindness
+participantdata_f1 <- filter(participantdata, duplicated(manual_ID)==FALSE)  # who played the game 2x (delete all attempts after the 1st)
+participantdata_f2 <- filter(participantdata_f1, is.na(manual_ID)==FALSE)      # who did not fill out the datasheet
 participantdata_f3 <- filter(participantdata_f2, is.na(resultfile)==FALSE)  # who did not start the game
 participantdata_f4 <- filter(participantdata_f3, wentback==FALSE)           # who went back to the instructions page after making some moves in the game
-participantdata_f5 <- filter(participantdata_f4, (country_of_birth == "CONSENT REVOKED")==FALSE) # who revoked consent
-participantdata_f6 <- filter(participantdata_f5, duplicated(manual_ID)==FALSE)  # who played the game 2x (delete all attempts after the 1st)
-participantdata_inc <- filter(participantdata_f6, is.na(aha)==FALSE) # who will be included in data analysis
+participantdata_f5 <- filter(participantdata_f4, is.na(aha)==FALSE)        # who did not fill out survey
+participantdata_f6 <- filter(participantdata_f5, colorblindness==FALSE)     # who checked color-blindness
+participantdata_inc <- filter(participantdata_f6, (country_of_birth == "CONSENT REVOKED")==FALSE) # who revoked consent
 
-# Who did not get to survey (quit game early or did not press continue button after timeout) - count these as GAVE UP!!!
-gave_up <- filter(participantdata_f6, is.na(aha))
-# this criteria is not sufficient: these could be those for whom the server froze during the survey!!!
-
-# who have missing game file, but survey is filled out - pay anyway, because this is server error
+# Who did not get to survey (quit game early or did not press continue button after timeout, or the server froze)
+# consent revoked, timed out, returned could be also people who gave up - could correlate with the difficulty of the task
+no_survey <- filter(participantdata_f6, is.na(aha))
 
 # Exclusion reasons for Prolific feedback
 actions <- rep.int(NA, sessions)
@@ -340,71 +339,81 @@ approved_list <- temp$prolific_ID # this can be copid to Prolific for batch appr
 manually_reject <- filter(participant_todo, prolific_action != "PAY")
 
 # exclude invalid cases and those who gave up from the other datasets too
-# timestampdata_inc <- timestampdata %>%
-#   filter(is.element(index, participantdata_inc$index)) %>%
-#   arrange(index, timestamp)
-# 
-# prolificdata_inc <- prolificdata %>%
-#   filter(is.element(participant_id, participantdata_inc$manual_ID)) %>%
-#   arrange(participant_id)
-# 
-# movedata_inc <- movedata %>%
-#   filter(is.element(index, participantdata_inc$index)) %>%
-#   arrange(index)
+timestampdata_inc <- timestampdata %>%
+  filter(is.element(index, participantdata_inc$index)) %>%
+  arrange(index, timestamp)
+
+prolificdata_inc <- prolificdata %>%
+  filter(is.element(participant_id, participantdata_inc$manual_ID)) %>%
+  arrange(participant_id)
+
+movedata_inc <- movedata %>%
+  filter(is.element(index, participantdata_inc$index)) %>%
+  arrange(index)
 
 ```
 
-We excluded participants who:
+We excluded entries where the participant:
 
-* Quit during the first data sheet: `r sessions - nrow(participantdata_f1)`
-* Indicated that they were colorblind: `r nrow(participantdata_f1) - nrow(participantdata_f2)`
-* Did not start the game after filling out the data sheet: `r nrow(participantdata_f2) - nrow(participantdata_f3)`
-* Refreshed the screen during the game or went back to the instructions page after starting the game: `r nrow(participantdata_f3) - nrow(participantdata_f4)`
-* Revoked their consent to use their data: `r nrow(participantdata_f4) - nrow(participantdata_f5)`
-* Played the game more than once, even if they got assigned a different condition after the first time (we still included their first attempt though): `r nrow(participantdata_f5) - nrow(participantdata_f6)`
-* Who did not fill out the final survey: `r nrow(participantdata_f6) - nrow(participantdata_inc)`
+* Played the game more than once, even if they got assigned a different condition after the first time (we still included their first attempt though): `r nrow(participantdata_f1) - nrow(participantdata)`
+* Did not fill out the first data sheet: `r nrow(participantdata_f2) - nrow(participantdata_f1)`
+* Did not start the game after filling out the data sheet: `r nrow(participantdata_f3) - nrow(participantdata_f2)`
+* Refreshed the screen during the game or went back to the instructions page after starting the game: `r nrow(participantdata_f4) - nrow(participantdata_f3)`
+* Who did not fill out the final survey: `r nrow(participantdata_f5) - nrow(participantdata_f4)`
+* Indicated that they were colorblind: `r nrow(participantdata_f6) - nrow(participantdata_f5)`
+* Revoked their consent to use their data: `r nrow(participantdata_inc) - nrow(participantdata_f6)`
 
-Those participants did not fill out the survey could be those, who 
+Those participants who did not fill out the survey could be those, who 
 
 * quit the experiment during the game before time out, or 
 * left their computer and never pressed the "Continue" button after time out, or
 * who finished their game, but who could not submit the survey, because the server froze. 
 
-These participants did not complete the survey, but still have some data from the game.
-
-For several participants, the screen froze on the survey page. For these participants we sent out the survey questions separately in a Google form. `r nrow(surveydata2)` participants completed the form, so we could include their data in the analyses.
-
 Our participant funnel looked like this:
 
 * The number of experimental sessions started: `r sessions`
-* The number of participants who gave informed consent and filled out the first datasheet: `r nrow(participantdata_f1)`
-* The number of participants who indicated that they were not colorblind: `r nrow(participantdata_f2)`
-* The number of participants who started the game: `r nrow(participantdata_f3)`
-* The number of participants who did not refresh the game or went back to the instructions page: `r nrow(participantdata_f4)`
-* The number of participants who did not revoke their consent to use their data: `r nrow(participantdata_f5)`
-* The number of participants who only played the game once: `r nrow(participantdata_f6)`
-* The number of participants who did not give up during the game and filled out the last survey too: `r nrow(participantdata_inc)`
+* The number of participants who properly finished the experiment and surveys without refreshing the screen or going back in their browser: `r nrow(participantdata_f5)`
+* From these, the number of participants who were not colorblind: `r nrow(participantdata_f6)`
+* From these, the number of participants who did not revoke their consent to use their data: `r nrow(participantdata_inc)`
 
 All-in-all, we excluded `r sessions - nrow(participantdata_inc)` initialized experimental sessions and we were left with `r nrow(participantdata_inc)` participants.
-
-We need 78*7 = 546 participants. 
-546 - `r nrow(participantdata_inc)` = `r 546 - nrow(participantdata_inc)` participants needed.
 
 # Stopping criteria
 
 ## Stopping rule
-We run the experiment until we had enough (78) participants in each condition after automatically evaluating them based on the exclusion criteria described above. First, the conditions were assigned randomly, then as we got closer to the desired number of participnats, we only let a certain number of participants to enter each condition to make up for the missing number of participants. This process was not exact, so we ended up with a few extra participants in some conditions. We stopped the experiment when each condition had at least 78 participants after the exclusions.    
-We read the survey answers of the remaining participants and decided to exclude a few more:
+We run the experiment until we had enough *(78) participants in each condition* after automatically evaluating them based on the exclusion criteria described above. First, the conditions were assigned randomly, then as we got closer to the desired number of participnats, we only let a certain number of participants to enter each condition to make up for the missing number of participants. This process was not exact, so we ended up with a few extra participants in some conditions. We stopped the experiment when each condition had at least 78 participants after the exclusions.    
 
-* ...
+```{r Summarize conditions}
 
-After this manual excludion process,should we exclude the extra participants if there are more than 78 in a group?
+partic_groups <- participantdata_inc %>%
+  group_by(condition) %>%
+  summarize(
+    Nbof_participants = n_distinct(index),
+    Nbof_solvers = sum(solver),
+    Nbof_nonsolvers = Nbof_participants - Nbof_solvers,
+    Failure_rate = Nbof_nonsolvers / Nbof_participants,
+    Solution_rate = Nbof_solvers/Nbof_participants,
+    Nbof_ahas = sum(aha),
+    Aha_rate = Nbof_ahas/Nbof_participants,
+    Nbof_ahas_solvers = sum(solver*aha),
+    Aha_rate_solvers = Nbof_ahas_solvers / Nbof_solvers,
+    Avg_task_time = mean(task_time),
+    Avg_nbof_moves = mean(nbof_moves)
+  )
+
+partic_groups <- arrange(partic_groups, factor(condition, levels = c("wlin", "wlout", "wnol", "wnolfs", "wnola", "moonsq", "wonly")))
+partic_groups_rownames <- tibble::column_to_rownames(partic_groups, "condition")
+
+kable(partic_groups[,c(1, 2, 10, 5, 11, 12)], 
+      digits = 3,
+      col.names = c("Condition", "Number of participants", "Aha rate of solvers", "Failure rate", "Avg task time", "Avg number of moves"))
+
+```
 
 ## To do on Prolific
 
 Approve the participation and pay the following participants (to be copied to Prolific -> Approve by upload):
 `r kable(approved_list, col.names="Batch approve list")`
-  
   
 Manually reject participation on Prolific:  
 
@@ -428,7 +437,7 @@ The time-out limit was calculated by the Prolific website to be 39 minutes for t
 * We approved and paid the remaining `r nrow(filter(prolificdata, status == "APPROVED"))` participants
 * From these, we could use the data of `r nrow(participantdata_inc)` participants
 
-Sometimes we lost data because of server error. Other times, the browser of participants froze (probably also server error). In these cases, we cannot use the data of these participants, but we still have to pay them, because it was not their fault.
+Sometimes we lost data because of server error. Other times, the screen of participants froze (probably also server error). In these cases, we cannot use the data of these participants, but we still have to pay them, because it was not their fault.
 
 Costs for the experiment should be: `r nrow(filter(prolificdata, status == "APPROVED")) * 1.396`
 
@@ -439,90 +448,51 @@ The pilot experiments cost 73.23 GBP all together:
 * Pilot 3: 14.01 GBP
 * Pilot 4:  8.82 GBP
 
-
-
-## Summary of conditions
-
-```{r Summarize conditions}
-
-partic_groups <- participantdata_inc %>%
-  group_by(condition) %>%
-  summarize(
-    Nbof_participants = n_distinct(index),
-    Nbof_solvers = sum(solver),
-    Nbof_nonsolvers = Nbof_participants - Nbof_solvers,
-    Failure_rate = Nbof_nonsolvers / Nbof_participants,
-    Solution_rate = Nbof_solvers/Nbof_participants,
-    Nbof_ahas = sum(aha),
-    Aha_rate = Nbof_ahas/Nbof_participants,
-    Nbof_ahas_solvers = sum(solver*aha),
-    Aha_rate_solvers = Nbof_ahas_solvers / Nbof_solvers,
-    Avg_task_time = mean(task_time),
-    Avg_nbof_moves = mean(nbof_moves)
-  )
-
-partic_groups <- arrange(partic_groups, factor(condition, levels = c("wlin", "wlout", "wnol", "wnolfs", "wnola", "moonsq", "wonly")))
-partic_groups_rownames <- tibble::column_to_rownames(partic_groups, "condition")
-
-# WLIN <- filter(participantdata, condition=="wlin")
-# WLOUT <- filter(participantdata, condition=="wlout")
-# WNOL <- filter(participantdata, condition=="wnol")
-# WNOLFS <- filter(participantdata, condition=="wnolfs")
-# WNOLA <- filter(participantdata, condition=="wnola")
-# MOONSQ <- filter(participantdata, condition=="moonsq")
-# WONLY <- filter(participantdata, condition=="wonly")
-
-kable(partic_groups[,c(1, 2, 10, 5, 11, 12)], 
-      digits = 3,
-      col.names = c("Condition", "Number of participants", "Aha rate of solvers", "Failure rate", "Avg task time", "Avg number of moves"))
-# make this tables nicer: shorter headers, floating point numbers
-
-missing <- (78 - partic_groups$Nbof_participants)
-
-```
-
-We need 78 participants per condition.  
-**We need `r sum(missing[which(missing>0)])` more participants**  
-**That is `r sum(missing[which(missing>0)]) * 1.396` GBP**
-
-
 # Save data
 
 ## Data files
 
+* We saved all dataframes that should be used in Step 2 as "_Step1_output.RData".  
+* We saved free text answers for manual rating as "_free_text_answers.xlsx"
+
 ```{r Saving and printing}
 
+# Print participantdata for human reading
 openxlsx::write.xlsx(participantdata_inc, file=paste(datadir, "_included_participants.xlsx", sep=""), 
            sheetName = "Sheet1", col.names = TRUE, append = FALSE)
 
+# Print free text answers for human rating
 free_text_answers <- participantdata_inc %>%
   arrange(condition) %>%
-  select(index, condition, solver, aha, difficulty, goal, rule, comments)
+  select(index, condition, solver, aha, difficulty, goal, comments, rule)
 
 openxlsx::write.xlsx(free_text_answers, file=paste(datadir, "_free_text_answers.xlsx", sep=""), 
            sheetName = "Sheet1", col.names = TRUE, append = FALSE)
 
+# Save dataframes 
+save(
+  movedata, no_survey, participantdata_inc,
+  file = "_Step1_output.RData"
+)
+save.image()
 
 ```
 
-
 ## Participant plots
+
+We can save plots for each participant, represeting their strategies.
 
 ```{r Plot}
 
 if (1==0){
-  participantdata_inc2 <- arrange(participantdata_inc, condition)
-  for (i in participantdata_inc2$index){
+  participantdata_inc <- arrange(participantdata_inc, condition)
+  for (i in participantdata_inc$index){
     P <- filter(participantdata,index==i)
     M <- filter(movedata, index==i)
     plot(M$timestamp, M$match)
     title(c(P$index, P$condition[], P$Solver))
   }
 }
-
-# Color points by rule!
-# What if no rule is TRUE? What is more than 1 rule is TRUE?
-
 
 ```
 

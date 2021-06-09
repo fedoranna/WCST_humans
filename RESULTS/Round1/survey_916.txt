@@ -610,9 +610,3 @@ wnola|912|To see how quickly people can pick up a pattern and solve a problem|Ye
 moonsq|913|To have us figure out a pattern when their wasn't any obvious information to go off of.|The cards went in order from left to right.|yes aha|2|No
 wnola|915|To work out how to sort the cards|No I didn't, annoyingly. I'd like to know the answer.|no aha|10|
 wnola|916|To see how long it would take to figure out how to sort the cards|Yes, just taking turns to each pile from left to right|yes aha|7|I wish I'd figured it out sooner
-wonly|929|not sure|yes. match the letter on the card with the one above.|yes aha|1|
-wonly|927|To see wether you can match the card to the correct key card.|The rule was that if the letter on the card matched the one on the key card, then it was correct.|yes aha|1|nope
-wonly|928|I don't know.|I matched the letters|no aha|1|no
-wonly|932|following instructions|No|yes aha|10|No
-wlout|931|To see if someone would try and find patters whilst ignoring the clear instructions|The letter that they needed to be shorted to was underneath the bottom card|yes aha|4|
-wnola|933|Goal of experiment was to find the solution of a problem.|No I didn't|no aha|7|No

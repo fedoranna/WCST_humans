@@ -1,16 +1,16 @@
 ---
 title: "WCST data analysis - Step 2"
 output:
-  pdf_document: default
-  html_document: default
   word_document: default
+  html_document: default
+  pdf_document: default
 editor_options: 
   chunk_output_type: console
 ---
 
 ```{r Setup and parameters, include=FALSE}
 
-# PACKAGES
+# Packages
 library(knitr)
 library(dplyr)
 library(stringdist)
@@ -20,37 +20,93 @@ library(openxlsx)
 
 knitr::opts_chunk$set(echo = FALSE)
 
-
-
-```
-
-# Read data frames and manually rated data
-
-# Exclude participants based on their free text answers
-
-```{r Manually exclude based on survey}
-
-# 119 DID IT TWICE
-
-
-
-exclude_list <- c("x", "xx") # Prolific ID of excluded participants based on their survey answers
-
-participantdata_inc2 <- filter(participantdata_inc, prolific_ID != exclude_list) # who will be included in data analysis
-
-
-
-
-
+# Parameters
+rm(list = ls()) # clear workspace
+datadir = "C:/Users/fedor/OneDrive/Documents/R/WCST_humans/RESULTS/Round1/" # the directory of the data files from Step 1
+datafile = "_Step1_output.RData"
+rated_data = "_free_text_answers_agreed.xlsx"
+samplesize = 78 # sample size per group
 
 ```
 
+# Manipulate data
 
-# Modify data
+## Read data frames and manually rated data
 
-Check if difficulty is outside of range, e.g. 50 or 7.5
+We have loaded the previously saved data frames and merged the manually categorized free text answers about the rule with participantdata_inc.
+
+```{r Read data}
+
+# Load data
+load(paste(datadir, datafile, sep=""))
+rates <- read.xlsx(paste(datadir, rated_data, sep=""))
+
+r6 = match(participantdata_inc$index, rates$index)
+participantdata_inc$rule_code <- rates$agreed.rule[r6]
+# participantdata_inc$exclude <- rates$Exclude
+
+```
+
+## Exclude participants
+
+We excluded extra participants if there were more than 78 in a condition.
+
+```{r Exclude participants}
+
+#participantdata_inc <- filter(participantdata_inc, participantdata_inc$exclude == 1) # who will be included in data analysis
+
+WLIN <- filter(participantdata_inc, condition=="wlin")[1:samplesize,]
+WLOUT <- filter(participantdata_inc, condition=="wlout")[1:samplesize,]
+WNOL <- filter(participantdata_inc, condition=="wnol")[1:samplesize,]
+WNOLFS <- filter(participantdata_inc, condition=="wnolfs")[1:samplesize,]
+WNOLA <- filter(participantdata_inc, condition=="wnola")[1:samplesize,]
+MOONSQ <- filter(participantdata_inc, condition=="moonsq")[1:samplesize,]
+WONLY <- filter(participantdata_inc, condition=="wonly")[1:samplesize,]
+
+participantdata_inc <- rbind(WLIN, WLOUT, WNOL, WNOLFS, WNOLA, MOONSQ, WONLY)
+
+```
+
+## Modify data
+
+Diffifulty of taks was supposed to be a number 1-10, but it was also a free text answer, and some participants went outside the recommended range (e.g.: difficulty = 50). We capped these numbers to 10.
+
+```{r Modify}
+
+participantdata_inc$difficulty_modified <- ifelse(participantdata_inc$difficulty<1, 1, participantdata_inc$difficulty)
+participantdata_inc$difficulty_modified <- ifelse(participantdata_inc$difficulty_modified>10, 10, participantdata_inc$difficulty)
+
+```
 
 # Statistical data analysis
+
+## Descriptive statistics
+
+```{r Conditions}
+
+partic_groups <- participantdata_inc %>%
+  group_by(condition) %>%
+  summarize(
+    Nbof_participants = n_distinct(index),
+    Nbof_solvers = sum(solver),
+    Nbof_nonsolvers = Nbof_participants - Nbof_solvers,
+    Failure_rate = Nbof_nonsolvers / Nbof_participants,
+    Solution_rate = Nbof_solvers/Nbof_participants,
+    Nbof_ahas = sum(aha),
+    Aha_rate = Nbof_ahas/Nbof_participants,
+    Nbof_ahas_solvers = sum(solver*aha),
+    Aha_rate_solvers = Nbof_ahas_solvers / Nbof_solvers,
+    Avg_task_time = mean(task_time),
+    Avg_nbof_moves = mean(nbof_moves)
+  )
+
+partic_groups <- arrange(partic_groups, factor(condition, levels = c("wlin", "wlout", "wnol", "wnolfs", "wnola", "moonsq", "wonly")))
+partic_groups2 <- tibble::column_to_rownames(partic_groups, "condition")
+
+kable(partic_groups[,c(1, 2, 10, 5, 11, 12)], 
+      digits = 3,
+      col.names = c("Condition", "Number of participants", "Aha rate of solvers", "Failure rate", "Avg task time", "Avg number of moves"))
+```
 
 ## Difficulty of the task
 
@@ -62,13 +118,10 @@ We analyzed the contingency table containing the number of solvers and non-solve
 
 barplot(partic_groups$Solution_rate, names.arg = partic_groups$condition, main="Solution rates")
 
-# fisher.test(partic_groups2[c("wlin","wlout"), c("Nbof_solvers","Nbof_nonsolvers")])
-# fisher.test(partic_groups2[c("wlout","wnol"), c("Nbof_solvers","Nbof_nonsolvers")])
-# fisher.test(partic_groups2[c("wnolfs","wnola"), c("Nbof_solvers","Nbof_nonsolvers")])
-# fisher.test(partic_groups2[c("moonsq","wnola"), c("Nbof_solvers","Nbof_nonsolvers")])
-
-
-
+fisher.test(partic_groups2[c("wlin","wlout"), c("Nbof_solvers","Nbof_nonsolvers")])
+fisher.test(partic_groups2[c("wlout","wnol"), c("Nbof_solvers","Nbof_nonsolvers")])
+fisher.test(partic_groups2[c("wnolfs","wnola"), c("Nbof_solvers","Nbof_nonsolvers")])
+fisher.test(partic_groups2[c("moonsq","wnola"), c("Nbof_solvers","Nbof_nonsolvers")])
 
 ```
 
@@ -117,7 +170,7 @@ If the data is normally distributed, we use ANOVA, if it is not, we use Wilcoxon
 
 
 boxplot(task_time ~ condition, 
-        participantdata_inc2,
+        participantdata_inc,
         ylab="Task time")
 
 # if (normality_wlin$p.value > 0.05 && normality_wlout$p.value > 0.05) {
