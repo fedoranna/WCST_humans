@@ -67,14 +67,14 @@ participantdata_inc <- rbind(WLIN, WLOUT, WNOL, WNOLFS, WNOLA, MOONSQ, WONLY)
 
 ## Modify data
 
-Diffifulty of taks was supposed to be a number 1-10, but it was also a free text answer, and some participants went outside the recommended range (e.g.: difficulty = 50). We capped these numbers to 10.
+Diffifulty of tasks was supposed to be a number 1-10, but it was also a free text answer, and some participants went outside the recommended range (e.g.: difficulty = 50). We capped these numbers to 10.
 
 ```{r Modify}
 
 participantdata_inc$difficulty_modified <- ifelse(participantdata_inc$difficulty<1, 1, participantdata_inc$difficulty)
 participantdata_inc$difficulty_modified <- ifelse(participantdata_inc$difficulty_modified>10, 10, participantdata_inc$difficulty)
 
-# CHECK IF THEY SOLVED IT EASILY - MIGHT BE TYPE
+# CHECK IF THEY SOLVED IT EASILY - MIGHT BE TYPO
 
 ```
 
@@ -93,6 +93,7 @@ partic_groups <- participantdata_inc %>%
     Nbof_ahas = sum(aha),
     Aha_rate = Nbof_ahas/Nbof_participants,
     Nbof_ahas_solvers = sum(solver*aha),
+    Nbof_noahas_solvers = Nbof_solvers - Nbof_ahas_solvers,
     Aha_rate_solvers = Nbof_ahas_solvers / Nbof_solvers,
     Avg_task_time = mean(task_time),
     Avg_nbof_moves = mean(nbof_moves)
@@ -110,120 +111,118 @@ kable(partic_groups[,c(1, 2, 10, 5, 11, 12)],
       col.names = c("Condition", "Number of participants", "Aha rate of solvers", "Failure rate", "Avg task time", "Avg number of moves"))
 ```
 
-# Statistical data analysis: Experiment 1
+# Statistical tests
 
 ## Difficulty of the task
 
-We compared the difficulty of the task in different conditions  
+A task is more difficult in one condition than in another condition, if less participants are able to solve it, or if it takes longer for participants to solve it (even if solution rates are the same). This is why, we compared the difficulty of the task
 
-* first by a Fisher’s exact test on the number of solvers
-* if the Fisher’s exact test test is not significant, we will compare task time, because it is possible that the number of solvers does not differ in the two conditions but still, if task time is significantly lower in one of the conditions that means that those who solved it, solved it faster. For comparing task time, we will use ANOVA if the data is normally distributed, or a two-sample Wilcoxon test (same as the Mann-Whitney test) if it is not.
+* first, by Fisher’s exact test on the number of solvers (pairwise comparisons)
+* then, if the Fisher’s exact test was not significant, we compared task time by two-sample Wilcoxon test (same as the Mann-Whitney test) or by 
+* ANOVA with Greenhouse-Geisser correction: robust also for non-normally distributed data
 
+The histogram of task times shows that the data is not normally distributed, so we had to use nonparametric tests.
 
-### Solution rate
+We also used binary logistic regression.
 
-We analyzed the contingency table containing the number of solvers and non-solvers in pairs of conditions. A p<0.05 means that the row/column association is statistically significant. 
-
-Experiment 1: WLIN < WLOUT < WNOL
-
-```{r Solution rates}
+```{r Plots for task difficulty}
 
 barplot(partic_groups$Solution_rate, names.arg = partic_groups$condition, main="Solution rates")
+
+hist(participantdata_inc$task_time)
+
+boxplot(task_time ~ condition, 
+        participantdata_inc,
+        ylab="Task time")
+
+# normality_wlin <- ks.test(
+  #   participantdata_inc %>% filter(condition=="wlin") %>% select(task_time),
+  #   pnorm, alternative="two.sided", exact=NULL)
+
+```
+
+## Aha feelings
+
+We used Fisher's exact tests to make pairwise comparison between conditions regarding the aha-ratings of solvers (whether they reported having aha-feelings or not).
+
+```{Plot for Aha}
+
+barplot(partic_groups$Aha_rate_solvers, names.arg = partic_groups$condition, main="Aha rate of solvers")
+
+```
+
+# Results - Experiment 1
+
+## Difficulty of the task - Experiment 1
+
+```{r Solution rates}
 
 F1 <- fisher.test(partic_groups2[c("wlin","wlout"), c("Nbof_solvers","Nbof_nonsolvers")])
 F2 <- fisher.test(partic_groups2[c("wlout","wnol"), c("Nbof_solvers","Nbof_nonsolvers")])
 
 ```
 
+We analyzed the contingency table containing the number of solvers and non-solvers in pairs of conditions with Fisher's exact test. A p<0.05 means that the row/column association is statistically significant:
+
 WLIN-WLOUT: p = `r F1$p.value`   
 WLOUT-WNOL: p = `r F2$p.value`
 
-### Solution time
+```{r Solution times}
 
-We checked whether the data was normally distributed with Kolmogorov-Smirnoff test:
+# Two-sample Wilcoxon test
 
-```{r Solution time}
+wlin_time <- participantdata_inc %>% filter(condition=="wlin") %>% select(task_time)
+wlin_time <- matrix(wlin_time[,1])
 
-hist(participantdata_inc$task_time)
-boxplot(task_time ~ condition, 
-        participantdata_inc,
-        ylab="Task time")
+wlout_time <- participantdata_inc %>% filter(condition=="wlout") %>% select(task_time)
+wlout_time <- matrix(wlout_time[,1])
 
-if (F1$p.value > 0.05){
-  
-  # normality_wlin <- ks.test(
-  #   participantdata_inc %>% filter(condition=="wlin") %>% select(task_time),
-  #   pnorm, alternative="two.sided", exact=NULL)
-  # normality_wlout <- ks.test(
-  #   participantdata_inc %>% filter(condition=="wlout") %>% select(task_time),
-  #   pnorm, alternative="two.sided", exact=NULL)
+W1 <- wilcox.test(wlin_time, wlout_time,
+                  alternative = "two.sided", 
+                  mu = 0, paired = FALSE, exact = NULL, correct = TRUE,
+                  conf.int = FALSE, conf.level = 0.95)
 
-  wlin_time <- participantdata_inc %>% filter(condition=="wlin") %>% select(task_time)
-  wlin_time <- matrix(wlin_time[,1])
-  
-  wlout_time <- participantdata_inc %>% filter(condition=="wlout") %>% select(task_time)
-  wlout_time <- matrix(wlout_time[,1])
-  
-  W1 <- wilcox.test(wlin_time, wlout_time,
-            alternative = "two.sided", 
-            mu = 0, paired = FALSE, exact = NULL, correct = TRUE,
-            conf.int = FALSE, conf.level = 0.95)
-
-}
-
-if (F2$p.value > 0.05){
-  
-  wlin_time <- participantdata_inc %>% filter(condition=="wlin") %>% select(task_time)
-  wlin_time <- matrix(wlin_time[,1])
-
-  wlout_time <- participantdata_inc2 %>% filter(condition=="wlout") %>% select(task_time)
-  wlout_time <- matrix(wlout_time[,1])
-
-  normality_wlout <- ks.test(
-    participantdata_inc %>% filter(condition=="wlout") %>% select(task_time),
-    pnorm, alternative="two.sided", exact=NULL)
-  normality_wnol <- ks.test(
-    participantdata_inc %>% filter(condition=="wnol") %>% select(task_time),
-    pnorm, alternative="two.sided", exact=NULL)
-
-}
+# ANOVA with Greenhouse-Geisser correction
 
 
-# ANOVA with greenhouse-geisser correction: robust also for non-normally distributed data
-
-```
-
-
-### Binary logistic regression
-
-
-
-## Aha feelings: Fisher's exact test
-
-```{r Aha-ratings}
-
-barplot(partic_groups$Aha_rate_solvers, names.arg = partic_groups$condition, main="Aha rate of solvers")
-
-# Experiment 1 vs control
-# WLIN > WONLY
-# WLOUT > WONLY
-# WNOL > WONLY
-
-# Experiment 1 levels
-# WLOUT > WLIN
-# WNOL > WLOUT
-
-# Experiment 2 vs control
-# WNOLFS > WONLY
-# WNOLA > WONLY
-# MOONSQ > WONLY
-
+# Binary logistic regression
 
 
 
 ```
 
-# Statistical data analysis: Experiment 2
+Wilcoxon test:  
+WLIN-WLOUT: p = `r W1$p.value`
+
+## Aha feelings - Experiment 1
+
+```{r Aha feelings}
+
+# Experiment 1 vs control:
+
+F3 <- fisher.test(partic_groups2[c("wlin","wonly"), c("Nbof_ahas_solvers","Nbof_noahas_solvers")])
+F4 <- fisher.test(partic_groups2[c("wlout","wonly"), c("Nbof_ahas_solvers","Nbof_noahas_solvers")])
+F5 <- fisher.test(partic_groups2[c("wnol","wonly"), c("Nbof_ahas_solvers","Nbof_noahas_solvers")])
+
+# Experiment 1 levels:
+
+F6 <- fisher.test(partic_groups2[c("wlout","wlin"), c("Nbof_ahas_solvers","Nbof_noahas_solvers")])
+F7 <- fisher.test(partic_groups2[c("wnol","wlout"), c("Nbof_ahas_solvers","Nbof_noahas_solvers")])
+
+```
+
+We analyzed the contingency table containing the number of solvers who reported Aha-feelings and number of solvers who did not report Aha-feelings in pairs of conditions with Fisher's exact tests. A p<0.05 means that the row/column association is statistically significant:
+
+WLIN > WONLY: p = `r F3$p.value`   
+WLOUT > WONLY: p = `r F4$p.value`   
+WNOL > WONLY: p = `r F5$p.value`   
+
+WLOUT > WLIN: p = `r F6$p.value`   
+WNOL > WLOUT: p = `r F7$p.value`
+
+# Results - Experiment 2
+
+## Difficulty of the task - Experiment 2
 
 MOONSQ < WNOLA: Removing distracting visual cues makes finding the sequence rule easier
 WNOLFS <  WNOLA: The sequence rule can be used in both conditions but the exclusion rule can only be used in the WNOLFS condition, which might help. 
@@ -231,17 +230,35 @@ WNOLFS <  WNOLA: The sequence rule can be used in both conditions but the exclus
 
 ```{r Solution rates - Experiment 2}
 
-barplot(partic_groups$Solution_rate, names.arg = partic_groups$condition, main="Solution rates")
-
-fisher.test(partic_groups2[c("wnolfs","wnola"), c("Nbof_solvers","Nbof_nonsolvers")])
-fisher.test(partic_groups2[c("moonsq","wnola"), c("Nbof_solvers","Nbof_nonsolvers")])
+F8 <- fisher.test(partic_groups2[c("wnolfs","wnola"), c("Nbof_solvers","Nbof_nonsolvers")])
+F9 <- fisher.test(partic_groups2[c("moonsq","wnola"), c("Nbof_solvers","Nbof_nonsolvers")])
 
 ```
 
+We analyzed the contingency table containing the number of solvers and non-solvers in pairs of conditions with Fisher's exact test. A p<0.05 means that the row/column association is statistically significant:
 
-## Other ideas
+WNOLFS-WNOLA: p = `r F8$p.value`   
+MOONSQ-WNOLA: p = `r F9$p.value`
 
-### Language
+## Aha feelings - Experiment 2
+
+```{r Aha feelings - Experiment 2}
+
+# Experiment 2 vs control:
+
+F10 <- fisher.test(partic_groups2[c("wnolfs","wonly"), c("Nbof_ahas_solvers","Nbof_noahas_solvers")])
+F11 <- fisher.test(partic_groups2[c("wnola","wonly"), c("Nbof_ahas_solvers","Nbof_noahas_solvers")])
+F12 <- fisher.test(partic_groups2[c("moonsq","wonly"), c("Nbof_ahas_solvers","Nbof_noahas_solvers")])
+
+```
+
+WNOLFS > WONLY: p = `r F10$p.value`   
+WNOLA > WONLY: p = `r F11$p.value`   
+MOONSQ > WONLY: p = `r F12$p.value`   
+
+# Other ideas
+
+## Language
 
 ```{Language}
 
@@ -249,21 +266,21 @@ filter(participantdata_inc, participantdata_inc$numbers4letters == 1)
 
 ```
 
-### Restructuring
+## Restructuring
 
 Sliding average for move time
 
-### Rules used (matching rule for moves)
+## Rules used (matching rule for moves)
 
-### Correct rule
+## Correct rule
 
 Does it correlate with problem difficulty or aha
 
-### Aha-rate of non solvers
+## Aha-rate of non solvers
 
 Correlates with difficulty?
 Number of false ahas vs subjective difficulty or solution time
 
-### Goal of the experiment
+## Goal of the experiment
 
 
