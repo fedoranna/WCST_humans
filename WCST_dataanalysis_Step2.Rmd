@@ -33,7 +33,7 @@ samplesize = 78 # sample size per group
 
 ## Read data frames and manually rated data
 
-We have loaded the previously saved data frames and merged the manually categorized free text answers about the rule with participantdata_inc.
+We have loaded data frames saved by the Step 1 script, and merged the manually categorized free text answers about the rule with participantdata_inc.
 
 ```{r Read data}
 
@@ -44,7 +44,7 @@ rates <- read.xlsx(paste(datadir, rated_data, sep=""))
 r6 = match(participantdata_inc$index, rates$index)
 participantdata_inc$rule_code <- rates$agreed.rule[r6]
 participantdata_inc$numbers4letters <- rates$Letter.rule.expained.with.numbers
-# participantdata_inc$exclude <- rates$Exclude
+
 
 ```
 
@@ -53,8 +53,6 @@ participantdata_inc$numbers4letters <- rates$Letter.rule.expained.with.numbers
 We excluded extra participants if there were more than 78 in a condition.
 
 ```{r Exclude participants}
-
-#participantdata_inc <- filter(participantdata_inc, participantdata_inc$exclude == 1) # who will be included in data analysis
 
 WLIN <- filter(participantdata_inc, condition=="wlin")[1:samplesize,]
 WLOUT <- filter(participantdata_inc, condition=="wlout")[1:samplesize,]
@@ -79,9 +77,7 @@ participantdata_inc$difficulty_modified <- ifelse(participantdata_inc$difficulty
 
 ```
 
-# Statistical data analysis
-
-## Descriptive statistics
+# Descriptive statistics
 
 ```{r Conditions}
 
@@ -101,91 +97,101 @@ partic_groups <- participantdata_inc %>%
     Avg_nbof_moves = mean(nbof_moves)
   )
 
+
 partic_groups <- arrange(partic_groups, factor(condition, levels = c("wlin", "wlout", "wnol", "wnolfs", "wnola", "moonsq", "wonly")))
-partic_groups2 <- tibble::column_to_rownames(partic_groups, "condition")
+
+conditions <- c("LettersIn", "LettersOut", "NoLetters", "FixedSequence", "AmbiguousCards", "Moon", "LettersOnly")
+partic_groups2 <- tibble::column_to_rownames(partic_groups, "condition") # same data, but rownames=conditions
+partic_groups[,1] <- conditions
 
 kable(partic_groups[,c(1, 2, 10, 5, 11, 12)], 
       digits = 3,
       col.names = c("Condition", "Number of participants", "Aha rate of solvers", "Failure rate", "Avg task time", "Avg number of moves"))
 ```
 
+# Statistical data analysis: Experiment 1
+
 ## Difficulty of the task
 
-### Solution rate: Fisher's exact tests
+We compared the difficulty of the task in different conditions  
+
+* first by a Fisher’s exact test on the number of solvers
+* if the Fisher’s exact test test is not significant, we will compare task time, because it is possible that the number of solvers does not differ in the two conditions but still, if task time is significantly lower in one of the conditions that means that those who solved it, solved it faster. For comparing task time, we will use ANOVA if the data is normally distributed, or a two-sample Wilcoxon test (same as the Mann-Whitney test) if it is not.
+
+
+### Solution rate
 
 We analyzed the contingency table containing the number of solvers and non-solvers in pairs of conditions. A p<0.05 means that the row/column association is statistically significant. 
 
-```{r Fisher tests}
+Experiment 1: WLIN < WLOUT < WNOL
+
+```{r Solution rates}
 
 barplot(partic_groups$Solution_rate, names.arg = partic_groups$condition, main="Solution rates")
 
-fisher.test(partic_groups2[c("wlin","wlout"), c("Nbof_solvers","Nbof_nonsolvers")])
-fisher.test(partic_groups2[c("wlout","wnol"), c("Nbof_solvers","Nbof_nonsolvers")])
-fisher.test(partic_groups2[c("wnolfs","wnola"), c("Nbof_solvers","Nbof_nonsolvers")])
-fisher.test(partic_groups2[c("moonsq","wnola"), c("Nbof_solvers","Nbof_nonsolvers")])
+F1 <- fisher.test(partic_groups2[c("wlin","wlout"), c("Nbof_solvers","Nbof_nonsolvers")])
+F2 <- fisher.test(partic_groups2[c("wlout","wnol"), c("Nbof_solvers","Nbof_nonsolvers")])
 
 ```
 
-### Failure rate
+WLIN-WLOUT: p = `r F1$p.value`   
+WLOUT-WNOL: p = `r F2$p.value`
 
-```{r Fisher tests 2}
-
-barplot(partic_groups$Failure_rate, names.arg = partic_groups$condition, main="Failure rates")
-
-```
-
-### Solution time: ANOVA
+### Solution time
 
 We checked whether the data was normally distributed with Kolmogorov-Smirnoff test:
 
-```{r Normality}
+```{r Solution time}
 
-#hist(participantdata_inc2$task_time)
-
-# wlin_time <- participantdata_inc2 %>% filter(condition=="wlin") %>% select(task_time)
-# wlin_time <- matrix(wlin_time[,1])
-# 
-# wlout_time <- participantdata_inc2 %>% filter(condition=="wlout") %>% select(task_time)
-# wlout_time <- matrix(wlout_time[,1])
-# 
-# 
-# 
-# normality_wlin <- ks.test(
-#   participantdata_inc2 %>% filter(condition=="wlin") %>% select(task_time), 
-#   pnorm, alternative="two.sided", exact=NULL)
-# normality_wlout <- ks.test(
-#   participantdata_inc2 %>% filter(condition=="wlout") %>% select(task_time), 
-#   pnorm, alternative="two.sided", exact=NULL)
-# 
-# normality_wlin
-# normality_wlout
-
-```
-If the data is normally distributed, we use ANOVA, if it is not, we use Wilcoxon.
-
-```{r ANOVA or Wilcoxon}
-
-# greenhouse-geisser correction: robust also for non-normally distributed data
-
-#participantdata_inc2$condition <- factor(participantdata_inc2$condition , levels=c("wlin", "wlout", "wnol", "wnolfs", "wnola", "moonsq", "wonly"))
-
-
+hist(participantdata_inc$task_time)
 boxplot(task_time ~ condition, 
         participantdata_inc,
         ylab="Task time")
 
-# if (normality_wlin$p.value > 0.05 && normality_wlout$p.value > 0.05) {
-#   stati <- t.test(wlin_time, wlout_time,
-#                   alternative="two.sided", paired=FALSE, var.equal=FALSE, conf.level=0.95)
-#   } else {
-#     stati <- wilcox.test(wlin_time, wlout_time,
-#                          alternative="two.sided", paired=FALSE, exact=NULL, correct=TRUE, conf.int=TRUE, conf.level=0.95) # two sample Wilcoxon test is the same as the Mann-Whitney test
-#   }
-# 
-# 
-# stati
+if (F1$p.value > 0.05){
+  
+  # normality_wlin <- ks.test(
+  #   participantdata_inc %>% filter(condition=="wlin") %>% select(task_time),
+  #   pnorm, alternative="two.sided", exact=NULL)
+  # normality_wlout <- ks.test(
+  #   participantdata_inc %>% filter(condition=="wlout") %>% select(task_time),
+  #   pnorm, alternative="two.sided", exact=NULL)
 
-``` 
+  wlin_time <- participantdata_inc %>% filter(condition=="wlin") %>% select(task_time)
+  wlin_time <- matrix(wlin_time[,1])
+  
+  wlout_time <- participantdata_inc %>% filter(condition=="wlout") %>% select(task_time)
+  wlout_time <- matrix(wlout_time[,1])
+  
+  W1 <- wilcox.test(wlin_time, wlout_time,
+            alternative = "two.sided", 
+            mu = 0, paired = FALSE, exact = NULL, correct = TRUE,
+            conf.int = FALSE, conf.level = 0.95)
+
+}
+
+if (F2$p.value > 0.05){
+  
+  wlin_time <- participantdata_inc %>% filter(condition=="wlin") %>% select(task_time)
+  wlin_time <- matrix(wlin_time[,1])
+
+  wlout_time <- participantdata_inc2 %>% filter(condition=="wlout") %>% select(task_time)
+  wlout_time <- matrix(wlout_time[,1])
+
+  normality_wlout <- ks.test(
+    participantdata_inc %>% filter(condition=="wlout") %>% select(task_time),
+    pnorm, alternative="two.sided", exact=NULL)
+  normality_wnol <- ks.test(
+    participantdata_inc %>% filter(condition=="wnol") %>% select(task_time),
+    pnorm, alternative="two.sided", exact=NULL)
+
+}
+
+
+# ANOVA with greenhouse-geisser correction: robust also for non-normally distributed data
+
+```
+
 
 ### Binary logistic regression
 
@@ -197,12 +203,56 @@ boxplot(task_time ~ condition,
 
 barplot(partic_groups$Aha_rate_solvers, names.arg = partic_groups$condition, main="Aha rate of solvers")
 
+# Experiment 1 vs control
+# WLIN > WONLY
+# WLOUT > WONLY
+# WNOL > WONLY
+
+# Experiment 1 levels
+# WLOUT > WLIN
+# WNOL > WLOUT
+
+# Experiment 2 vs control
+# WNOLFS > WONLY
+# WNOLA > WONLY
+# MOONSQ > WONLY
+
+
+
+
+```
+
+# Statistical data analysis: Experiment 2
+
+MOONSQ < WNOLA: Removing distracting visual cues makes finding the sequence rule easier
+WNOLFS <  WNOLA: The sequence rule can be used in both conditions but the exclusion rule can only be used in the WNOLFS condition, which might help. 
+
+
+```{r Solution rates - Experiment 2}
+
+barplot(partic_groups$Solution_rate, names.arg = partic_groups$condition, main="Solution rates")
+
+fisher.test(partic_groups2[c("wnolfs","wnola"), c("Nbof_solvers","Nbof_nonsolvers")])
+fisher.test(partic_groups2[c("moonsq","wnola"), c("Nbof_solvers","Nbof_nonsolvers")])
 
 ```
 
 
+## Other
 
+### Language
 
+```{Language}
+
+filter(participantdata_inc, participantdata_inc$numbers4letters == 1)
+
+```
+
+### Restructuring
+
+Sliding average for move time
+
+### Rules used
 
 
 
