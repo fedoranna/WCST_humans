@@ -24,7 +24,7 @@ knitr::opts_chunk$set(echo = FALSE)
 rm(list = ls()) # clear workspace
 datadir = "C:/Users/fedor/OneDrive/Documents/R/WCST_humans/RESULTS/Round1/" # the directory of the data files from Step 1
 datafile = "_Step1_output.RData"
-rated_data = "_free_text_answers_agreed.xlsx"
+rated_data = "C:/Users/fedor/OneDrive/Documents/R/WCST_humans/_free_text_answers_agreed.xlsx"
 samplesize = 78 # sample size per group
 
 ```
@@ -39,12 +39,11 @@ We have loaded data frames saved by the Step 1 script, and merged the manually c
 
 # Load data
 load(paste(datadir, datafile, sep=""))
-rates <- read.xlsx(paste(datadir, rated_data, sep=""))
+rates <- read.xlsx(rated_data)
 
 r6 = match(participantdata_inc$index, rates$index)
 participantdata_inc$rule_code <- rates$agreed.rule[r6]
 participantdata_inc$numbers4letters <- rates$Letter.rule.expained.with.numbers
-
 
 ```
 
@@ -74,6 +73,8 @@ Diffifulty of taks was supposed to be a number 1-10, but it was also a free text
 
 participantdata_inc$difficulty_modified <- ifelse(participantdata_inc$difficulty<1, 1, participantdata_inc$difficulty)
 participantdata_inc$difficulty_modified <- ifelse(participantdata_inc$difficulty_modified>10, 10, participantdata_inc$difficulty)
+
+# CHECK IF THEY SOLVED IT EASILY - MIGHT BE TYPE
 
 ```
 
@@ -238,7 +239,7 @@ fisher.test(partic_groups2[c("moonsq","wnola"), c("Nbof_solvers","Nbof_nonsolver
 ```
 
 
-## Other
+## Other ideas
 
 ### Language
 
@@ -252,7 +253,17 @@ filter(participantdata_inc, participantdata_inc$numbers4letters == 1)
 
 Sliding average for move time
 
-### Rules used
+### Rules used (matching rule for moves)
 
+### Correct rule
+
+Does it correlate with problem difficulty or aha
+
+### Aha-rate of non solvers
+
+Correlates with difficulty?
+Number of false ahas vs subjective difficulty or solution time
+
+### Goal of the experiment
 
 
