@@ -72,13 +72,19 @@ Diffifulty of tasks was supposed to be a number 1-10, but it was also a free tex
 ```{r Modify}
 
 participantdata_inc$difficulty_modified <- ifelse(participantdata_inc$difficulty<1, 1, participantdata_inc$difficulty)
-participantdata_inc$difficulty_modified <- ifelse(participantdata_inc$difficulty_modified>10, 10, participantdata_inc$difficulty)
+participantdata_inc$difficulty_modified <- ifelse(participantdata_inc$difficulty>10, 10, participantdata_inc$difficulty)
+# 17: diff = 50; WNOL, solved it in 4 min, correct rule, 223, 708, 747
+# 223: diff = 60; WNOLFS, did not solve it, said difficult and easy at the same time
+# 708: diff= 65, WNOLFS, solved it in 2 min
+# 747: diff= 50; WNOL, solved it in 8 min
 
 # CHECK IF THEY SOLVED IT EASILY - MIGHT BE TYPO
 
 ```
 
 # Descriptive statistics
+
+The number of participants was 78 in each condition. 
 
 ```{r Conditions}
 
@@ -95,20 +101,19 @@ partic_groups <- participantdata_inc %>%
     Nbof_ahas_solvers = sum(solver*aha),
     Nbof_noahas_solvers = Nbof_solvers - Nbof_ahas_solvers,
     Aha_rate_solvers = Nbof_ahas_solvers / Nbof_solvers,
-    Avg_task_time = mean(task_time),
+    Median_task_time = median(task_time),
     Avg_nbof_moves = mean(nbof_moves)
   )
 
-
 partic_groups <- arrange(partic_groups, factor(condition, levels = c("wlin", "wlout", "wnol", "wnolfs", "wnola", "moonsq", "wonly")))
 
-conditions <- c("LettersIn", "LettersOut", "NoLetters", "FixedSequence", "AmbiguousCards", "Moon", "LettersOnly")
+conditions <- c("Letters In", "Letters Out", "No Letters", "Fixed Sequence", "Ambiguous Cards", "Moon Card", "Letters Only")
 partic_groups2 <- tibble::column_to_rownames(partic_groups, "condition") # same data, but rownames=conditions
 partic_groups[,1] <- conditions
 
-kable(partic_groups[,c(1, 2, 10, 5, 11, 12)], 
-      digits = 3,
-      col.names = c("Condition", "Number of participants", "Aha rate of solvers", "Failure rate", "Avg task time", "Avg number of moves"))
+kable(partic_groups[,c(1, 2, 3, 6, 12, 11)], 
+      digits = 2,
+      col.names = c("Condition", "Number of participants", "Number of solvers", "Solution rate", "Median task time (min)", "Aha rate of solvers"))
 ```
 
 # Statistical tests
@@ -121,33 +126,61 @@ A task is more difficult in one condition than in another condition, if less par
 * then, if the Fisher’s exact test was not significant, we compared task time by two-sample Wilcoxon test (same as the Mann-Whitney test) or by 
 * ANOVA with Greenhouse-Geisser correction: robust also for non-normally distributed data
 
-The histogram of task times shows that the data is not normally distributed, so we had to use nonparametric tests.
+We also used binary logistic regression.  
 
-We also used binary logistic regression.
+The following plots compare all conditions of Experiment 1 and 2 and the control condition:  
 
-```{r Plots for task difficulty}
+* The barplot shows solution rates accross conditions.
+* The histogram shows the distribution of task time in all the conditions.
+* The boxplot shows the distribution of task time accrosss condition. Circles represent outliers. Whiskers extend to the most extreme data point which is no more than 1.5 times the interquartile range from the box. If the notches of two boxes do not overlap this is strong evidence that the two medians differ.
 
-barplot(partic_groups$Solution_rate, names.arg = partic_groups$condition, main="Solution rates")
 
-hist(participantdata_inc$task_time)
+```{r Plots for task difficulty, warning=FALSE}
 
-boxplot(task_time ~ condition, 
-        participantdata_inc,
-        ylab="Task time")
+par(mar=c(8,4,4,4))
+barplot(partic_groups$Solution_rate, 
+        names.arg = conditions,
+        ylab = "Solution rate", 
+        ylim = c(0,1),
+        cex.names=0.9,
+        las=2)
 
-# normality_wlin <- ks.test(
-  #   participantdata_inc %>% filter(condition=="wlin") %>% select(task_time),
-  #   pnorm, alternative="two.sided", exact=NULL)
+boxplot(task_time ~ condition, participantdata_inc,
+        ylab="Task time",
+        xlab="",
+        range=1.5,
+        names=conditions,
+        notch=TRUE,
+        cex.names=0.2,
+        las=3,
+        cex.axis=0.8)
+
+par(mar=c(4,4,4,4))
+hist(participantdata_inc$task_time,
+     xlab="Task time (min)",
+     main="")
+
+# Kolmogorov-Smirnov Test on task_time (all conditions)
+normality <- ks.test(
+   participantdata_inc %>% select(task_time),
+   pnorm, alternative="two.sided", exact=NULL)
 
 ```
 
+The histogram of task times shows that the data is not normally distributed, so we had to use nonparametric tests. The Kolmogorov-Smirnov normality test on task time also showed that the data was not normally distributed.
+
+D = `r normality.D`, p = `r normality.p-value`
+
 ## Aha feelings
 
-We used Fisher's exact tests to make pairwise comparison between conditions regarding the aha-ratings of solvers (whether they reported having aha-feelings or not).
+We used Fisher's exact tests to make pairwise comparison between conditions regarding the Aha-feelings of solvers (whether they reported having aha-feelings or not).
 
 ```{Plot for Aha}
 
-barplot(partic_groups$Aha_rate_solvers, names.arg = partic_groups$condition, main="Aha rate of solvers")
+barplot(partic_groups$Aha_rate_solvers, 
+        names.arg = conditions, 
+        ylab="Aha rate of solvers",
+        ylim=c(0,1))
 
 ```
 
