@@ -17,6 +17,7 @@ library(stringdist)
 library(reshape2)   
 library(ggplot2)
 library(openxlsx)
+library(pander)
 
 knitr::opts_chunk$set(echo = FALSE)
 
@@ -67,7 +68,7 @@ participantdata_inc <- rbind(WLIN, WLOUT, WNOL, WNOLFS, WNOLA, MOONSQ, WONLY)
 
 ## Modify data
 
-Diffifulty of tasks was supposed to be a number 1-10, but it was also a free text answer, and some participants went outside the recommended range (e.g.: difficulty = 50). We capped these numbers to 10.
+The subjective difficulty rating supposed to be a number 1-10, but it was also a free text answer, and some participants went outside the recommended range (e.g.: difficulty = 50). We capped these numbers to 10.
 
 ```{r Modify}
 
@@ -123,10 +124,9 @@ kable(partic_groups[,c(1, 2, 3, 6, 12, 11)],
 A task is more difficult in one condition than in another condition, if less participants are able to solve it, or if it takes longer for participants to solve it (even if solution rates are the same). This is why, we compared the difficulty of the task
 
 * first, by Fisher’s exact test on the number of solvers (pairwise comparisons)
-* then, if the Fisher’s exact test was not significant, we compared task time by two-sample Wilcoxon test (same as the Mann-Whitney test) or by 
-* ANOVA with Greenhouse-Geisser correction: robust also for non-normally distributed data
-
-We also used binary logistic regression.  
+* then, if the Fisher’s exact test was not significant, we compared task time by two-sample Wilcoxon test (same as the Mann-Whitney test)  
+* **ANOVA with Greenhouse-Geisser correction: robust also for non-normally distributed data**
+* **We also used binary logistic regression.**
 
 The following plots compare all conditions of Experiment 1 and 2 and the control condition:  
 
@@ -169,18 +169,22 @@ normality <- ks.test(
 
 The histogram of task times shows that the data is not normally distributed, so we had to use nonparametric tests. The Kolmogorov-Smirnov normality test on task time also showed that the data was not normally distributed.
 
-D = `r normality.D`, p = `r normality.p-value`
+`r pander(normality)`
+
 
 ## Aha feelings
 
 We used Fisher's exact tests to make pairwise comparison between conditions regarding the Aha-feelings of solvers (whether they reported having aha-feelings or not).
 
-```{Plot for Aha}
+```{r Plot for Aha}
 
+par(mar=c(8,4,4,4))
 barplot(partic_groups$Aha_rate_solvers, 
         names.arg = conditions, 
         ylab="Aha rate of solvers",
-        ylim=c(0,1))
+        ylim=c(0,1),
+        cex.names=0.9,
+        las=2)
 
 ```
 
@@ -197,8 +201,11 @@ F2 <- fisher.test(partic_groups2[c("wlout","wnol"), c("Nbof_solvers","Nbof_nonso
 
 We analyzed the contingency table containing the number of solvers and non-solvers in pairs of conditions with Fisher's exact test. A p<0.05 means that the row/column association is statistically significant:
 
-WLIN-WLOUT: p = `r F1$p.value`   
-WLOUT-WNOL: p = `r F2$p.value`
+WLIN-WLOUT: **not significant** 
+`r pander(F1)`   
+  
+WLOUT-WNOL: **significant** 
+`r pander(F2)`
 
 ```{r Solution times}
 
@@ -224,8 +231,13 @@ W1 <- wilcox.test(wlin_time, wlout_time,
 
 ```
 
-Wilcoxon test:  
-WLIN-WLOUT: p = `r W1$p.value`
+WLIN-WLOUT task times: **significant**  
+`r pander(W1)`
+
+We conclude, that the difficulty of conditions in Experiment 1 was:  
+
+* WLIN < WLOUT
+* WLOUT < WNOL
 
 ## Aha feelings - Experiment 1
 
@@ -244,22 +256,42 @@ F7 <- fisher.test(partic_groups2[c("wnol","wlout"), c("Nbof_ahas_solvers","Nbof_
 
 ```
 
-We analyzed the contingency table containing the number of solvers who reported Aha-feelings and number of solvers who did not report Aha-feelings in pairs of conditions with Fisher's exact tests. A p<0.05 means that the row/column association is statistically significant:
+We analyzed the contingency table containing the number of solvers who reported Aha-feelings and number of solvers who did not report Aha-feelings in pairs of conditions with Fisher's exact tests. We compared all conditions to the control condition (Letters Only). A p<0.05 means that the row/column association is statistically significant:
 
-WLIN > WONLY: p = `r F3$p.value`   
-WLOUT > WONLY: p = `r F4$p.value`   
-WNOL > WONLY: p = `r F5$p.value`   
+WLIN > WONLY: **significant**  
+`r pander(F3)`  
 
-WLOUT > WLIN: p = `r F6$p.value`   
-WNOL > WLOUT: p = `r F7$p.value`
+WLOUT > WONLY: **significant**    
+`r pander(F4)`  
+
+WNOL > WONLY: **significant**    
+`r pander(F5)`  
+
+Levels:
+
+WLOUT > WLIN: **not significant**  
+`r pander(F6)`  
+
+WNOL > WLOUT: **not significant**  
+`r pander(F7)`
+
+## Described rules - Experiment 1
+
+```{r Deescribed rules - Experiment 1}
+
+#plot(WLIN$rule_code)
+
+```
+
 
 # Results - Experiment 2
 
 ## Difficulty of the task - Experiment 2
 
-MOONSQ < WNOLA: Removing distracting visual cues makes finding the sequence rule easier
-WNOLFS <  WNOLA: The sequence rule can be used in both conditions but the exclusion rule can only be used in the WNOLFS condition, which might help. 
+Our predictions about the difficulty of the task were:  
 
+* WNOLFS <  WNOLA: The sequence rule can be used in both conditions but the exclusion rule can only be used in the WNOLFS condition, which might help. 
+* MOONSQ < WNOLA: Only the sequence rule can be used in both conditions. Removing distracting visual cues makes finding the sequence rule easier
 
 ```{r Solution rates - Experiment 2}
 
@@ -270,8 +302,11 @@ F9 <- fisher.test(partic_groups2[c("moonsq","wnola"), c("Nbof_solvers","Nbof_non
 
 We analyzed the contingency table containing the number of solvers and non-solvers in pairs of conditions with Fisher's exact test. A p<0.05 means that the row/column association is statistically significant:
 
-WNOLFS-WNOLA: p = `r F8$p.value`   
-MOONSQ-WNOLA: p = `r F9$p.value`
+WNOLFS-WNOLA: **significant**  
+`r pander(F8)`  
+
+MOONSQ-WNOLA: **significant**  
+`r pander(F9)`
 
 ## Aha feelings - Experiment 2
 
@@ -285,17 +320,24 @@ F12 <- fisher.test(partic_groups2[c("moonsq","wonly"), c("Nbof_ahas_solvers","Nb
 
 ```
 
-WNOLFS > WONLY: p = `r F10$p.value`   
-WNOLA > WONLY: p = `r F11$p.value`   
-MOONSQ > WONLY: p = `r F12$p.value`   
+We compared all conditions of Experiment 2 with the control condition (Letters Only).  
+
+WNOLFS > WONLY: **significant**  
+`r pander(F10)`   
+
+WNOLA > WONLY: **significant**  
+`r pander(F11)`  
+
+MOONSQ > WONLY: **significant**
+`r pander(F12)`   
 
 # Other ideas
 
 ## Language
 
-```{Language}
+```{r Language}
 
-filter(participantdata_inc, participantdata_inc$numbers4letters == 1)
+#filter(participantdata_inc, participantdata_inc$numbers4letters == 1)
 
 ```
 
@@ -313,6 +355,18 @@ Does it correlate with problem difficulty or aha
 
 Correlates with difficulty?
 Number of false ahas vs subjective difficulty or solution time
+
+```{r Correlations}
+
+plot(partic_groups$Failure_rate, partic_groups$Aha_rate_solvers, type="p")
+plot(partic_groups$Median_task_time, partic_groups$Aha_rate_solvers, type="p")
+plot(partic_groups$Median_task_time, partic_groups$Avg_nbof_moves, type="p")
+
+
+
+```
+
+
 
 ## Goal of the experiment
 
