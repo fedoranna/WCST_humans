@@ -616,3 +616,4 @@ wonly|928|I don't know.|I matched the letters|no aha|1|no
 wonly|932|following instructions|No|yes aha|10|No
 wlout|931|To see if someone would try and find patters whilst ignoring the clear instructions|The letter that they needed to be shorted to was underneath the bottom card|yes aha|4|
 wnola|933|Goal of experiment was to find the solution of a problem.|No I didn't|no aha|7|No
+wnola|934|To see how quickly you pick up the pattern|It went 1,2,3,4 as in the first section ,next card goes in the next section etc|yes aha|4|

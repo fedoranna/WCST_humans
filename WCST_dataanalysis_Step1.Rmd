@@ -288,11 +288,11 @@ participantdata_f3 <- filter(participantdata_f2, is.na(resultfile)==FALSE)  # wh
 participantdata_f4 <- filter(participantdata_f3, wentback==FALSE)           # who went back to the instructions page after making some moves in the game
 participantdata_f5 <- filter(participantdata_f4, is.na(aha)==FALSE)        # who did not fill out survey
 participantdata_f6 <- filter(participantdata_f5, colorblindness==FALSE)     # who checked color-blindness
-participantdata_inc <- filter(participantdata_f6, (country_of_birth == "CONSENT REVOKED")==FALSE) # who revoked consent
+participantdata_f7 <- filter(participantdata_f6, task_time<15)              # who played longer than 15 min due to server error
+participantdata_inc <- filter(participantdata_f7, (country_of_birth == "CONSENT REVOKED")==FALSE) # who revoked consent
 
 # Who did not get to survey (quit game early or did not press continue button after timeout, or the server froze)
 # consent revoked, timed out, returned could be also people who gave up - could correlate with the difficulty of the task
-no_survey <- filter(participantdata_f6, is.na(aha))
 
 # Exclusion reasons for Prolific feedback
 actions <- rep.int(NA, sessions)
@@ -471,7 +471,7 @@ openxlsx::write.xlsx(free_text_answers, file=paste(datadir, "_free_text_answers.
 
 # Save dataframes 
 save(
-  movedata, no_survey, participantdata_inc,
+  movedata, participantdata_inc,
   file = "_Step1_output.RData"
 )
 save.image()

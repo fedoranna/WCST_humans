@@ -44,7 +44,7 @@ rates <- read.xlsx(rated_data)
 
 r6 = match(participantdata_inc$index, rates$index)
 participantdata_inc$rule_code <- rates$agreed.rule[r6]
-participantdata_inc$numbers4letters <- rates$Letter.rule.expained.with.numbers
+participantdata_inc$numbers4letters <- rates$Letter.rule.expained.with.numbers[r6]
 
 ```
 
@@ -53,6 +53,8 @@ participantdata_inc$numbers4letters <- rates$Letter.rule.expained.with.numbers
 We excluded extra participants if there were more than 78 in a condition.
 
 ```{r Exclude participants}
+
+# Exclude 769
 
 WLIN <- filter(participantdata_inc, condition=="wlin")[1:samplesize,]
 WLOUT <- filter(participantdata_inc, condition=="wlout")[1:samplesize,]
@@ -72,14 +74,12 @@ The subjective difficulty rating supposed to be a number 1-10, but it was also a
 
 ```{r Modify}
 
-participantdata_inc$difficulty_modified <- ifelse(participantdata_inc$difficulty<1, 1, participantdata_inc$difficulty)
-participantdata_inc$difficulty_modified <- ifelse(participantdata_inc$difficulty>10, 10, participantdata_inc$difficulty)
+participantdata_inc$difficulty_modified <- ifelse(participantdata_inc$difficulty<1, NA, participantdata_inc$difficulty)
+participantdata_inc$difficulty_modified <- ifelse(participantdata_inc$difficulty>10, NA, participantdata_inc$difficulty)
 # 17: diff = 50; WNOL, solved it in 4 min, correct rule, 223, 708, 747
 # 223: diff = 60; WNOLFS, did not solve it, said difficult and easy at the same time
 # 708: diff= 65, WNOLFS, solved it in 2 min
 # 747: diff= 50; WNOL, solved it in 8 min
-
-# CHECK IF THEY SOLVED IT EASILY - MIGHT BE TYPO
 
 ```
 
@@ -108,7 +108,7 @@ partic_groups <- participantdata_inc %>%
 
 partic_groups <- arrange(partic_groups, factor(condition, levels = c("wlin", "wlout", "wnol", "wnolfs", "wnola", "moonsq", "wonly")))
 
-conditions <- c("Letters In", "Letters Out", "No Letters", "Fixed Sequence", "Ambiguous Cards", "Moon Card", "Letters Only")
+conditions <- c("Letters In", "Letters Out", "No Letters", "Fixed Sequence", "Ambiguous Cards", "Non-Standard", "Letters Only")
 partic_groups2 <- tibble::column_to_rownames(partic_groups, "condition") # same data, but rownames=conditions
 partic_groups[,1] <- conditions
 
@@ -150,7 +150,7 @@ boxplot(task_time ~ condition, participantdata_inc,
         xlab="",
         range=1.5,
         names=conditions,
-        notch=TRUE,
+        notch=FALSE,
         cex.names=0.2,
         las=3,
         cex.axis=0.8)
@@ -279,7 +279,7 @@ WNOL > WLOUT: **not significant**
 
 ```{r Deescribed rules - Experiment 1}
 
-#plot(WLIN$rule_code)
+summarize(WLIN)
 
 ```
 
