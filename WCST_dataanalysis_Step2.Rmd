@@ -23,10 +23,9 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Parameters
 rm(list = ls()) # clear workspace
-datadir = "C:/Users/fedor/OneDrive/Documents/R/WCST_humans/RESULTS/Round1/" # the directory of the data files from Step 1
+datadir = "C:/Users/fedor/OneDrive/Documents/R/WCST_humans/RESULTS/Experiments/" # the directory of the data files from Step 1
 datafile = "_Step1_output.RData"
 rated_data = "C:/Users/fedor/OneDrive/Documents/R/WCST_humans/_free_text_answers_agreed.xlsx"
-samplesize = 78 # sample size per group
 
 ```
 
@@ -48,38 +47,14 @@ participantdata_inc$numbers4letters <- rates$Letter.rule.expained.with.numbers[r
 
 ```
 
-## Exclude participants
-
-We excluded extra participants if there were more than 78 in a condition.
-
-```{r Exclude participants}
-
-# Exclude 769
-
-WLIN <- filter(participantdata_inc, condition=="wlin")[1:samplesize,]
-WLOUT <- filter(participantdata_inc, condition=="wlout")[1:samplesize,]
-WNOL <- filter(participantdata_inc, condition=="wnol")[1:samplesize,]
-WNOLFS <- filter(participantdata_inc, condition=="wnolfs")[1:samplesize,]
-WNOLA <- filter(participantdata_inc, condition=="wnola")[1:samplesize,]
-MOONSQ <- filter(participantdata_inc, condition=="moonsq")[1:samplesize,]
-WONLY <- filter(participantdata_inc, condition=="wonly")[1:samplesize,]
-
-participantdata_inc <- rbind(WLIN, WLOUT, WNOL, WNOLFS, WNOLA, MOONSQ, WONLY)
-
-```
-
 ## Modify data
 
-The subjective difficulty rating supposed to be a number 1-10, but it was also a free text answer, and some participants went outside the recommended range (e.g.: difficulty = 50). We capped these numbers to 10.
+The subjective difficulty rating was supposed to be a number between 1-10, but it was a free text answer, and some participants went outside the recommended range (e.g.: difficulty = 50). We replaced these numbers with NA, because we were not sure whether participants wanted to indicate that the task was very difficult or if they mistakenly applied a range between 1-100 (some of them solved the task relatively quickly).
 
 ```{r Modify}
 
 participantdata_inc$difficulty_modified <- ifelse(participantdata_inc$difficulty<1, NA, participantdata_inc$difficulty)
 participantdata_inc$difficulty_modified <- ifelse(participantdata_inc$difficulty>10, NA, participantdata_inc$difficulty)
-# 17: diff = 50; WNOL, solved it in 4 min, correct rule, 223, 708, 747
-# 223: diff = 60; WNOLFS, did not solve it, said difficult and easy at the same time
-# 708: diff= 65, WNOLFS, solved it in 2 min
-# 747: diff= 50; WNOL, solved it in 8 min
 
 ```
 
@@ -279,7 +254,7 @@ WNOL > WLOUT: **not significant**
 
 ```{r Deescribed rules - Experiment 1}
 
-summarize(WLIN)
+
 
 ```
 
@@ -362,12 +337,30 @@ plot(partic_groups$Failure_rate, partic_groups$Aha_rate_solvers, type="p")
 plot(partic_groups$Median_task_time, partic_groups$Aha_rate_solvers, type="p")
 plot(partic_groups$Median_task_time, partic_groups$Avg_nbof_moves, type="p")
 
-
-
 ```
 
 
 
 ## Goal of the experiment
+
+## Participant plots
+
+We can save plots for each participant, represeting their strategies.
+
+```{r Plot}
+
+if (1==0){
+  participantdata_inc <- arrange(participantdata_inc, condition)
+  for (i in participantdata_inc$index){
+    P <- filter(participantdata,index==i)
+    M <- filter(movedata, index==i)
+    plot(M$timestamp, M$match)
+    title(c(P$index, P$condition[], P$Solver))
+  }
+}
+
+```
+
+
 
 
