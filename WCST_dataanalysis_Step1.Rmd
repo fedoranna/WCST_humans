@@ -503,7 +503,7 @@ openxlsx::write.xlsx(free_text_answers, file=paste(datadir, "_free_text_answers.
 # Save dataframes 
 save(
   movedata_inc, participantdata_inc, participantdata_gaveup,
-  file = "_Step1_output.RData"
+  file = paste(datadir, "_Step1_output.RData", sep="")
 )
 save.image()
 

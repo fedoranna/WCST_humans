@@ -25,7 +25,7 @@ knitr::opts_chunk$set(echo = FALSE)
 rm(list = ls()) # clear workspace
 datadir = "C:/Users/fedor/OneDrive/Documents/R/WCST_humans/RESULTS/Experiments/" # the directory of the data files from Step 1
 datafile = "_Step1_output.RData"
-rated_data = "C:/Users/fedor/OneDrive/Documents/R/WCST_humans/_free_text_answers_agreed.xlsx"
+rated_data = "C:/Users/fedor/OneDrive/Documents/R/WCST_humans/RESULTS/Experiments/_free_text_answers_agreed.xlsx"
 
 ```
 
@@ -60,6 +60,8 @@ participantdata_inc$difficulty_modified <- ifelse(participantdata_inc$difficulty
 
 # Descriptive statistics
 
+## Conditions
+
 The number of participants was 78 in each condition. 
 
 ```{r Conditions}
@@ -78,19 +80,34 @@ partic_groups <- participantdata_inc %>%
     Nbof_noahas_solvers = Nbof_solvers - Nbof_ahas_solvers,
     Aha_rate_solvers = Nbof_ahas_solvers / Nbof_solvers,
     Median_task_time = median(task_time),
+    SD_task_time = sd(task_time),
     Avg_nbof_moves = mean(nbof_moves)
   )
+partic_groups <- arrange(partic_groups, factor(condition, levels = c("wlin", "wlout", "wnol", "wonly", "wnolfs", "wnola", "moonsq")))
 
-partic_groups <- arrange(partic_groups, factor(condition, levels = c("wlin", "wlout", "wnol", "wnolfs", "wnola", "moonsq", "wonly")))
-
-conditions <- c("Letters In", "Letters Out", "No Letters", "Fixed Sequence", "Ambiguous Cards", "Non-Standard", "Letters Only")
+conditions <- c("Letters In", "Letters Out", "No Letters", "Letters Only", "Fixed Deck", "Ambiguous Cards", "Uniform Deck")
 partic_groups2 <- tibble::column_to_rownames(partic_groups, "condition") # same data, but rownames=conditions
 partic_groups[,1] <- conditions
 
-kable(partic_groups[,c(1, 2, 3, 6, 12, 11)], 
+kable(partic_groups[,c(1, 2, 3, 6, 12, 13, 11)], 
       digits = 2,
-      col.names = c("Condition", "Number of participants", "Number of solvers", "Solution rate", "Median task time (min)", "Aha rate of solvers"))
+      col.names = c("Condition", "Number of participants", "Number of solvers", "Solution rate", "Median task time (min)", "SD of task time", "Aha rate of solvers"))
 ```
+
+## Demographics
+
+```{r Demographics}
+
+participantdata_E1 <- filter(participantdata_inc, 
+                             condition=="wlin" | condition=="wlout" | condition=="wnol" | condition=="wonly")
+participantdata_E2 <- filter(participantdata_inc, 
+                             condition=="wnlofs" | condition=="wnola" | condition=="moonsq")
+
+```
+
+In Experiment 1, out of `r nrow(participantdata_E1)` participants, `r nrow(filter(participantdata_E1, manual_sex == "female"))` were female. The majority were United Kingdom nationals (`r nrow(filter(participantdata_E1, nationality == "United Kingdom"))` participants).  
+In Experiment 2, out of `r nrow(participantdata_E2)` participants, `r nrow(filter(participantdata_E2, manual_sex == "female"))` were female. The majority were United Kingdom nationals (`r nrow(filter(participantdata_E2, nationality == "United Kingdom"))` participants).
+
 
 # Statistical tests
 
@@ -99,7 +116,7 @@ kable(partic_groups[,c(1, 2, 3, 6, 12, 11)],
 A task is more difficult in one condition than in another condition, if less participants are able to solve it, or if it takes longer for participants to solve it (even if solution rates are the same). This is why, we compared the difficulty of the task
 
 * first, by Fisher’s exact test on the number of solvers (pairwise comparisons)
-* then, if the Fisher’s exact test was not significant, we compared task time by two-sample Wilcoxon test (same as the Mann-Whitney test)  
+* then, if the Fisher’s exact test was not significant, we compared task time by two-sample Wilcoxon test (same as the Mann-Whitney test)
 * **ANOVA with Greenhouse-Geisser correction: robust also for non-normally distributed data**
 * **We also used binary logistic regression.**
 
